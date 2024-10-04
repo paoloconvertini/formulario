@@ -1,0 +1,132 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-md-12  ordine-title">
+      {{ricetta.nome}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="mat-elevation-z8">
+        <table class="table" style="margin: 0 20px">
+          <thead class="thead-light">
+          <tr>
+            <td class="header">Materia prima</td>
+            <td class="header">U.M.</td>
+            <td class="header">% MP</td>
+            <td class="header">TOTALE x Miscel. QL20</td>
+            <td class="header">Prezzo X QL.</td>
+            <td class="header">Costo x QL</td>
+            <td class="header">TOTALE COSTO x QL20</td>
+            <td class="header">TOTALE COSTO x QL1</td>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let materia of ricetta.materiePrime">
+              <td class="header">{{materia.nome}}</td>
+              <td>{{materia.unitaMisura}}</td>
+              <td>{{materia.percentuale*20}}</td>
+              <td>{{materia.percentuale}}%</td>
+              <td>{{materia.percentuale*20/100}}</td>
+              <td>{{materia.prezzo | currency: 'EUR':'symbol'}}</td>
+              <td>{{materia.prezzo*materia.percentuale*20/100 | currency: 'EUR':'symbol'}}</td>
+              <td>{{materia.prezzo*materia.percentuale/100 | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr>
+              <td class="header">Totali</td>
+              <td></td>
+              <td>{{totMassa}}</td>
+              <td>{{sommaPerc}}%</td>
+              <td>{{totMiscela20}}</td>
+              <td></td>
+              <td>{{prezzo20 | currency: 'EUR':'symbol'}}</td>
+              <td style="background-color: red; color: white; font-size: larger">{{prezzoUnitario | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr>
+              <td class="header">Lavoro</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{ricetta.lavoro | currency: 'EUR':'symbol'}}</td>
+              <td>{{ricetta.lavoro*20 | currency: 'EUR':'symbol'}}</td>
+              <td>{{ricetta.lavoro | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr style="border-bottom: 1px;">
+              <td class="header">Bancale,sacco,imballo</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{ricetta.sacco | currency: 'EUR':'symbol'}}</td>
+              <td>{{ricetta.sacco*20 | currency: 'EUR':'symbol'}}</td>
+              <td>{{ricetta.sacco | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr style="border-bottom: 4px double">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="color:#728E58">Totale con lavoro e imballo</td>
+              <td style="color: #ffffff;background-color: #728E58;">{{ricetta.sacco + ricetta.lavoro + prezzoUnitario | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Ricarico 20</td>
+              <td>{{(ricetta.sacco + ricetta.lavoro + prezzoUnitario)*1.2 | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Ricarico 30</td>
+              <td>{{(ricetta.sacco + ricetta.lavoro + prezzoUnitario)*1.3 | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Ricarico 40</td>
+              <td>{{(ricetta.sacco + ricetta.lavoro + prezzoUnitario)*1.4 | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Ricarico 50</td>
+              <td>{{(ricetta.sacco + ricetta.lavoro + prezzoUnitario)*1.5 | currency: 'EUR':'symbol'}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Ricarico 60</td>
+              <td>{{(ricetta.sacco + ricetta.lavoro + prezzoUnitario)*1.6 | currency: 'EUR':'symbol'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

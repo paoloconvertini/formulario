@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>
+      <button mat-button [matMenuTriggerFor]="powercolle">Powercolle</button>
+    <button mat-button [matMenuTriggerFor]="weber">Weber</button>
+    <mat-menu #powercolle="matMenu">
+      <button mat-menu-item class="pointer" [routerLink]="['/p/materie-prime']">Materie prime</button>
+      <button mat-menu-item class="pointer" [routerLink]="['/p/prodotti']">Prodotti</button>
+      <button mat-menu-item class="pointer" [routerLink]="['/p/listini']">Listini</button>
+    </mat-menu>
+    <mat-menu #weber="matMenu">
+      <button mat-menu-item class="pointer" [routerLink]="['/w/materie-prime']">Materie prime</button>
+      <button mat-menu-item class="pointer" [routerLink]="['/w/prodotti']">Prodotti</button>
+      <button mat-menu-item class="pointer" [routerLink]="['/w/riepilogo']">Riepilogo</button>
+    </mat-menu>
+    </span>
+    <span class="example-spacer"></span>
+    <mat-icon [matMenuTriggerFor]="menu" class="pointer example-icon" aria-hidden="false" aria-label="Example user verified icon"
+              >admin_panel_settings
+    </mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="pointer" [routerLink]="['/users']">
+        <mat-icon>person</mat-icon>
+        <span>Gestisci dipendenti</span>
+      </button>
+      <button mat-menu-item class="pointer" [routerLink]="['/role']">
+        <mat-icon>manage_accounts</mat-icon>
+        <span>Gestisci ruoli</span>
+      </button>
+    </mat-menu>
+    <mat-icon class="example-icon pointer" aria-hidden="false" aria-label="Example user verified icon" matTooltip="Esci"
+              (click)="logout()">logout
+    </mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>

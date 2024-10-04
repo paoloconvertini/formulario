@@ -1,0 +1,39 @@
+<div class="" >
+  <div class="row">
+    <div class="col-md-11">
+    </div>
+    <div class="col-md-1 float-end">
+      <button mat-icon-button color="primary" (click)="generaListino()" matTooltip="genera listino">
+        <mat-icon aria-hidden="false" aria-label="close" fontIcon="picture_as_pdf" color="primary"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="mat-elevation-z8">
+        <table class="table" style="margin: 0 20px">
+          <thead>
+          <tr>
+            <td class="header">Prodotto</td>
+            <td class="header">Sacco</td>
+            <td class="header">Pedana</td>
+            <td class="header">Prezzo imp.a Q.le Iva esclusa</td>
+            <td class="header">Prezzo a Q.le con Iva</td>
+            <td class="header">Prezzo a sacco Iva compresa</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let articolo of listino.articoli">
+            <td class="header">{{articolo.nome}}</td>
+            <td>Kg. 25</td>
+            <td>Q.li 17.50</td>
+            <td>{{articolo.prezzo | currency: 'EUR':'symbol'}}</td>
+            <td>{{articolo.prezzo*20/100 | currency: 'EUR':'symbol'}}</td>
+            <td>{{articolo.prezzo*100 | currency: 'EUR':'symbol'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

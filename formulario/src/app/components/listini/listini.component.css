@@ -1,0 +1,11 @@
+.example-container {
+  min-height: 400px;
+  margin: 10px;
+}
+
+.active {
+  opacity: unset!important;
+  color: #728E58 !important;
+  font-weight: bolder !important;
+  background-color: transparent!important;
+}

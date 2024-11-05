@@ -29,7 +29,7 @@ export class LoginComponent extends BaseComponent{
         password: this.password.value
       }).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
-           this.router.navigate(['/ordini-clienti']);
+           this.router.navigate(['/materie-prime']);
         },
         error: (e) => {
           if (e) {

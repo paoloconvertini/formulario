@@ -32,12 +32,16 @@ export class AuthService {
         if(!res.idToken) {
           console.log("ERRORE");
         }
+        if (user.username) {
+          localStorage.setItem(environment.USERNAME, user.username);
+        }
         this._isLoggedIn$.next(true);
         localStorage.setItem(environment.TOKEN_KEY, res.idToken);
         let tokenObj = this.helper.decodeToken(res.idToken);
         user.ruolo = tokenObj.groups;
-
-
+        if (user.ruolo!.includes('Admin')) {
+          localStorage.setItem(environment.ADMIN, 'Y');
+        }
       }),
       tap(() => this.snackbar.open('Login successfull', 'Chiudi', {
         duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
@@ -48,6 +52,8 @@ export class AuthService {
   logout() {
     this._isLoggedIn$.next(false);
     localStorage.removeItem(environment.TOKEN_KEY);
+    localStorage.removeItem(environment.ADMIN);
+    localStorage.removeItem(environment.USERNAME);
     this.router.navigate(['']);
   }
 }

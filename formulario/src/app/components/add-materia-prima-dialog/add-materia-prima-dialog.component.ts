@@ -1,40 +1,40 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonListComponent} from "../commonListComponent";
 import {MatDialogRef} from "@angular/material/dialog";
-import {PianocontiService} from "../../services/pianoconti/pianoconti.service";
 import {map, Observable, startWith, takeUntil} from "rxjs";
 import {FormControl} from '@angular/forms';
+import {MateriePrimeService} from "../../services/materie-prime.service";
 
 @Component({
-  selector: 'app-add-fornitore-dialog',
-  templateUrl: './add-fornitore-dialog.component.html',
-  styleUrls: ['./add-fornitore-dialog.component.css']
+  selector: 'app-add-materia-prima-dialog',
+  templateUrl: './add-materia-prima-dialog.component.html',
+  styleUrls: ['./add-materia-prima-dialog.component.css']
 })
-export class AddFornitoreDialogComponent extends CommonListComponent implements OnInit{
+export class AddMateriaPrimaDialogComponent extends CommonListComponent implements OnInit{
 
   myControl = new FormControl('');
-  fornitori: any = [];
+  materiePrime: any = [];
   filteredOptions: Observable<any[]> | undefined;
-  conto: any;
+  materiaPrima: any;
 
-  constructor(private dialogRef: MatDialogRef<AddFornitoreDialogComponent>,private service: PianocontiService) {
+  constructor(private dialogRef: MatDialogRef<AddMateriaPrimaDialogComponent>, private service: MateriePrimeService) {
     super();
   }
 
   ngOnInit(): void {
-    this.getFornitori();
+    this.getMateriePrime();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
   }
 
-  getFornitori(): void {
+  getMateriePrime(): void {
     this.loader = true;
-      this.service.getFornitori().pipe(takeUntil(this.ngUnsubscribe))
+      this.service.getAll().pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (data) => {
-            this.fornitori = data;
+            this.materiePrime = data;
             this.loader = false;
           },
           error: (e: any) => {
@@ -47,11 +47,11 @@ export class AddFornitoreDialogComponent extends CommonListComponent implements 
   private _filter(value: any): any[] {
     let filterValue: string;
     if(value instanceof Object) {
-      filterValue = value.intestazione.toLowerCase();
+      filterValue = value.nome.toLowerCase();
     } else {
       filterValue = value.toLowerCase();
     }
-    return this.fornitori.filter((option: { intestazione: string; }) => option.intestazione.toLowerCase().includes(filterValue));
+    return this.materiePrime.filter((option: { nome: string; }) => option.nome.toLowerCase().includes(filterValue));
   }
 
 
@@ -60,11 +60,11 @@ export class AddFornitoreDialogComponent extends CommonListComponent implements 
   }
 
   submitForm() {
-      this.dialogRef.close(this.conto);
+      this.dialogRef.close(this.materiaPrima);
   }
 
   getOption(option: any) {
-    return option.intestazione;
+    return option.nome;
   }
 
 }

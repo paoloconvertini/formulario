@@ -1,7 +1,8 @@
 import {Prezzo} from "./prezzo";
 
 export class StoricoPrezzi {
-  id: any
   nome: string = ''
-  prezzi: Prezzo[] = []
+  prezzo: any
+  updateDate: any
+  updateUser: string  = ''
 }

@@ -1,0 +1,46 @@
+<h1 mat-dialog-title class="text-center">
+  <input type="text" class="form-control" [(ngModel)]="prodotto.nome">
+</h1>
+<div mat-dialog-content>
+  <button mat-raised-button color="primary" style="float: right" (click)="add()">Aggiungi materia prima</button>
+  <table class="table" style="margin: 0 20px">
+    <thead class="thead-light">
+    <tr>
+      <td class="header">Materia prima</td>
+      <td class="header percentuale">% Materia prima</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let materia of prodottoMateriePrimeList">
+      <td class="header">
+        <input type="text"
+               class="form-control input-search"
+               placeholder="materiaPrima"
+               aria-label="materiaPrima"
+               matInput
+               [(ngModel)]="materia.materiaPrimaNome"
+               required
+        >
+        <button (click)="cercaMateriaPrima(materia)" mat-icon-button matTooltip="Cerca materia prima" >
+          <mat-icon aria-hidden="false" aria-label="save" fontIcon="search" color="primary"></mat-icon>
+        </button>
+      </td>
+      <td class="percentuale">
+        <input type="number" min="0" max="100" class="form-control" [(ngModel)]="materia.percentuale" (change)="calcolaSomma()">
+      </td>
+    </tr>
+    <tr>
+      <td class="header">Totali</td>
+      <td>{{sommaPerc}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="warn">Indietro</button>
+  <button mat-button (click)="salva()" color="primary">Salva</button>
+  <div *ngIf="showMsq">
+    <div class="error-msg">{{msg}}</div>
+  </div>
+</div>

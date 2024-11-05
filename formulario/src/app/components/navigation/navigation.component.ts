@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {environment} from "../../../environments/environment";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-navigation',
@@ -7,8 +9,20 @@ import { Component } from '@angular/core';
 })
 export class NavigationComponent {
 
-  logout(){
-    alert('esco dal programma!');
+  isAdmin: boolean = false;
+
+  constructor(public authService: AuthService) {
+    this.username = localStorage.getItem(environment.USERNAME);
+    if (localStorage.getItem(environment.ADMIN)) {
+      this.isAdmin = true;
+    }
+  }
+
+
+  username: string | null;
+
+  logout() {
+    this.authService.logout();
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonListComponent} from "../commonListComponent";
-import {RicetteService} from "../../services/ricette.service";
+import {ProdottiService} from "../../services/prodotti.service";
 import {ActivatedRoute} from "@angular/router";
 import {ListiniService} from "../../services/listini.service";
 import {takeUntil} from "rxjs";

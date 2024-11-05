@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FakeBackendProvider} from "./interceptors/mock-api";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { MateriePrimeComponent } from './components/materie-prime/materie-prime.component';
-import { RicetteComponent } from './components/ricette/ricette.component';
+import { ProdottiComponent } from './components/prodotti/prodotti.component';
 import { ListiniComponent } from './components/listini/listini.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -23,7 +22,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatListModule} from "@angular/material/list";
-import { DettaglioRicettaComponent } from './components/dettaglio-ricetta/dettaglio-ricetta.component';
+import { DettaglioProdottoComponent } from './components/dettaglio-prodotto/dettaglio-prodotto.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -44,7 +43,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCardModule} from "@angular/material/card";
 import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
 import {JwtModule} from "@auth0/angular-jwt";
-import { DettaglioRicettaDialogComponent } from './components/dettaglio-ricetta-dialog/dettaglio-ricetta-dialog.component';
+import { DettaglioProdottoDialogComponent } from './components/dettaglio-prodotto-dialog/dettaglio-prodotto-dialog.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {AddMateriaPrimaDialogComponent} from "./components/add-materia-prima-dialog/add-materia-prima-dialog.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -68,53 +69,52 @@ export const DateFormats = {
     LoginComponent,
     NavigationComponent,
     MateriePrimeComponent,
-    RicetteComponent,
+    ProdottiComponent,
     ListiniComponent,
     ConfirmDialogComponent,
-    DettaglioRicettaComponent,
+    DettaglioProdottoComponent,
     StoricoDialogComponent,
     ListiniDettaglioComponent,
     ResetPasswordComponent,
-    DettaglioRicettaDialogComponent
+    DettaglioProdottoDialogComponent,
+    AddMateriaPrimaDialogComponent
   ],
-  imports: [
-    MatDatepickerModule,
-    MatMomentDateModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatGridListModule,
-    MatListModule,
-    MatDividerModule,
-    MatSidenavModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8080', 'localhost:8081', 'localhost:8082', 'localhost:8083',
-          '192.168.1.150:8080', '192.168.1.150:8181', '192.168.1.150:8082', '192.168.1.150:8083',
-          '192.168.1.60:8080', '192.168.1.60:8081', '192.168.1.60:8082', '192.168.1.60:8083',
-          '192.168.1.56:8080', '192.168.1.56:8081', '192.168.1.56:8082', '192.168.1.56:8083']
-      }
-    }),
-  ],
-  providers: [FakeBackendProvider,
+    imports: [
+        MatDatepickerModule,
+        MatMomentDateModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        HttpClientModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        MatGridListModule,
+        MatListModule,
+        MatDividerModule,
+        MatSidenavModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ['localhost:8080', 'localhost:8081']
+            }
+        }),
+        MatAutocompleteModule,
+    ],
+  providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },

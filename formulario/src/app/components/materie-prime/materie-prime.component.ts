@@ -7,6 +7,7 @@ import {MateriaPrima} from "../../models/materiaPrima";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {StoricoDialogComponent} from "../storico-dialog/storico-dialog.component";
+import {MateriaPrimaDto} from "../../models/materia-prima-dto";
 
 @Component({
   selector: 'app-materie-prime',
@@ -31,7 +32,7 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
     this.loader = true;
       this.service.getAll().pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
-          next: (data: any[]) => {
+          next: (data: MateriaPrima[]) => {
             this.createPaginator(data, 100);
             if(this.filtro.searchText){
               this.applyFilter();
@@ -46,7 +47,9 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
   }
 
   creaNuovo() {
-    this.dataSource.data.push(new MateriaPrima());
+    let mp = new MateriaPrima();
+    mp.edit = true;
+    this.dataSource.data.push(mp);
     this.dataSource.data = this.dataSource.data;
   }
 
@@ -85,8 +88,12 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
   }
 
   salva(materiaPrima: any) {
+    let dto = new  MateriaPrimaDto();
+    dto.nome = materiaPrima.nome;
+    dto.unitaMisura = materiaPrima.unitaMisura;
+    dto.prezzo = materiaPrima.prezzo;
     if(materiaPrima.id){
-      this.service.update({id: materiaPrima.id, name: materiaPrima.name}).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+      this.service.aggiorna(dto, materiaPrima.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
           if (!res.error) {
             this.retrieveList();
@@ -95,7 +102,7 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
         error: (e) => console.error(e)
       });
     } else {
-      this.service.save({name: materiaPrima.name}).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+      this.service.save(dto).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
           if (!res.error) {
             this.retrieveList();
@@ -115,10 +122,10 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
     }
   }
 
-  apriStorico(id: any) {
+  apriStorico(materiaPrima: any) {
     const dialogRef = this.dialog.open(StoricoDialogComponent, {
       width: '30%',
-      data: {id: id},
+      data: materiaPrima,
     });
     dialogRef.afterClosed().subscribe();
   }

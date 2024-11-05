@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddFornitoreDialogComponent } from './add-fornitore-dialog.component';
+import { AddMateriaPrimaDialogComponent } from './add-materia-prima-dialog.component';
 
 describe('AddFornitoreDialogComponent', () => {
-  let component: AddFornitoreDialogComponent;
-  let fixture: ComponentFixture<AddFornitoreDialogComponent>;
+  let component: AddMateriaPrimaDialogComponent;
+  let fixture: ComponentFixture<AddMateriaPrimaDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddFornitoreDialogComponent ]
+      declarations: [ AddMateriaPrimaDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddFornitoreDialogComponent);
+    fixture = TestBed.createComponent(AddMateriaPrimaDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,16 +1,16 @@
-<h1 mat-dialog-title>Cerca fornitore</h1>
+<h1 mat-dialog-title>Cerca Materia prima</h1>
 <div mat-dialog-content>
   <form class="example-form">
     <mat-form-field class="example-full-width" appearance="fill">
       <input type="text"
-             placeholder="Fornitore"
-             aria-label="Number"
+             placeholder="Materia prima"
+             aria-label="nome"
              matInput
              [formControl]="myControl"
              [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="conto = $event.option.value" [displayWith]="getOption" >
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="materiaPrima = $event.option.value" [displayWith]="getOption" >
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option.intestazione}} - {{option.sottoConto}}
+          {{option.nome}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

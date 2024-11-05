@@ -4,9 +4,10 @@ import {takeUntil} from "rxjs";
 import {MateriePrimeService} from "../../services/materie-prime.service";
 import {BaseComponent} from "../baseComponent";
 import {StoricoPrezzi} from "../../models/storicoPrezzi";
+import {MateriaPrimaRegistroService} from "../../services/materia-prima-registro.service";
 
 interface DialogData {
-  id: any;
+  materiaPrima: any;
 }
 
 @Component({
@@ -17,15 +18,17 @@ interface DialogData {
 export class StoricoDialogComponent extends BaseComponent implements OnInit{
 
   loader = false;
-  storicoPrezzi: StoricoPrezzi = new StoricoPrezzi();
+  storicoPrezzi: StoricoPrezzi[] =  [];
+  materiaPrima: any
 
-  constructor(  private service: MateriePrimeService,  public dialogRef: MatDialogRef<StoricoDialogComponent>,
+  constructor(  private service: MateriaPrimaRegistroService,  public dialogRef: MatDialogRef<StoricoDialogComponent>,
                   @Inject(MAT_DIALOG_DATA) public data: DialogData,) {
     super();
   }
 
 
   ngOnInit(): void {
+    this.materiaPrima = this.data;
     this.getStoricoPrezzi();
   }
 
@@ -36,7 +39,7 @@ export class StoricoDialogComponent extends BaseComponent implements OnInit{
 
   getStoricoPrezzi() {
     this.loader = true;
-    this.service.getStoricoPrezzi(this.data.id).pipe(takeUntil(this.ngUnsubscribe))
+    this.service.getStoricoPrezzi(this.materiaPrima.id).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data: any) => {
           this.loader = false;

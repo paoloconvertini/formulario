@@ -1,11 +1,11 @@
 <h1 mat-dialog-title class="text-center">STORICO PREZZI</h1>
 <div mat-dialog-content>
-  <h5>{{storicoPrezzi.nome}}</h5>
+  <h5>{{materiaPrima.nome}}</h5>
   <mat-list>
-    <mat-list-item *ngFor="let prezzo of storicoPrezzi.prezzi">
+    <mat-list-item *ngFor="let prezzo of storicoPrezzi">
       <span matListItemTitle>Prezzo: <b>{{prezzo.prezzo  | currency: 'EUR':'symbol'}}</b></span>
-      <span matListItemLine>Data: {{prezzo.data | date:'dd/MM/yyyy'}}</span>
-      <span matListItemLine>Utente: <em>{{prezzo.utente}}</em></span>
+      <span matListItemLine>Data: {{prezzo.updateDate | date:'dd/MM/yyyy'}}</span>
+      <span matListItemLine>Utente: <em>{{prezzo.updateUser}}</em></span>
     </mat-list-item>
   </mat-list>
 </div>

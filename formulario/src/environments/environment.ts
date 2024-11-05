@@ -4,9 +4,17 @@
 
 export const environment = {
   production: false,
-  baseAuthUrl: undefined,
+  baseAuthUrl: 'http://localhost:8081/api/',
+  baseUrl:'http://localhost:8080/api/',
   TOKEN_KEY: 'access_token',
-  LOGIN: 'login'
+  LOGIN: 'login',
+  USERNAME: 'username',
+  ADMIN: 'Admin',
+  MATERIE_PRIME: 'materie-prime',
+  MATERIE_PRIME_REGISTRO: 'materie-prime-registro',
+  PRODOTTI:'prodotti',
+  PRODOTTO_MATERIE_PRIME:'prodotto-materie-prime',
+  LISTINI:''
 };
 
 /*

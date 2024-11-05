@@ -1,31 +1,35 @@
 import { Injectable } from '@angular/core';
+import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {CommonService} from "./common-service";
+import {MateriaPrimaDto} from "../models/materia-prima-dto";
+
+const url = environment.baseUrl + environment.MATERIE_PRIME;
 
 @Injectable({
   providedIn: 'root'
 })
-export class MateriePrimeService {
+export class MateriePrimeService extends CommonService{
 
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) {
+    super(http, url);
+  }
 
   getAll(): Observable<any> {
-    return this.http.get<any>('/materie-prime');
+    return this.http.get<any>(this.url);
   }
 
-  save(param: { name: any }): Observable<any>  {
-    return this.http.post<any>('/salva', param);
+  save(dto: MateriaPrimaDto): Observable<any>  {
+    return this.http.post<any>(this.url, dto);
   }
 
-  update(param: { name: any; id: any }): Observable<any>  {
-    return this.http.put<any>('/aggionra', param);
+  aggiorna(dto: MateriaPrimaDto, id: number): Observable<any>  {
+    return this.http.put<any>(this.url + `/${id}`, dto);
   }
 
   elimina(data: any): Observable<any>  {
     return this.http.delete<any>('/elimina', data);
   }
 
-  getStoricoPrezzi(id: any): Observable<any>  {
-    return this.http.get<any>(`/storico-prezzi/${id}`);
-  }
 }

@@ -4,4 +4,5 @@ export  class MateriaPrima {
   prezzo: number = 0
   percentuale: any
   unitaMisura: any
+  edit: boolean = false
 }

@@ -1,30 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {MateriePrimeComponent} from "./components/materie-prime/materie-prime.component";
-import {RicetteComponent} from "./components/ricette/ricette.component";
+import {ProdottiComponent} from "./components/prodotti/prodotti.component";
 import {ListiniComponent} from "./components/listini/listini.component";
-import {DettaglioRicettaComponent} from "./components/dettaglio-ricetta/dettaglio-ricetta.component";
+import {DettaglioProdottoComponent} from "./components/dettaglio-prodotto/dettaglio-prodotto.component";
 import {ListiniDettaglioComponent} from "./components/listini-dettaglio/listini-dettaglio.component";
 import {LoginComponent} from "./components/login/login.component";
 import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
 
 const routes: Routes = [
   {
-    path: ':param/materie-prime',
+    path: 'materie-prime',
     component: MateriePrimeComponent
   },
   {
-    path: ':param/prodotti',
-    component: RicetteComponent,
+    path: 'prodotti',
+    component: ProdottiComponent,
     children: [
       {
         path: 'dettaglio/:id',
-        component: DettaglioRicettaComponent
+        component: DettaglioProdottoComponent
       }
     ]
   },
   {
-    path: ':param/listini',
+    path: 'materie-prime/w',
+    component: MateriePrimeComponent
+  },
+  {
+    path: 'prodotti/w',
+    component: ProdottiComponent,
+    children: [
+      {
+        path: 'dettaglio/:id',
+        component: DettaglioProdottoComponent
+      }
+    ]
+  },
+  {
+    path: 'listini',
     component: ListiniComponent,
     children: [
       {

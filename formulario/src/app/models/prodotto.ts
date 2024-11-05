@@ -1,6 +1,6 @@
 import {MateriaPrima} from "./materiaPrima";
 
-export class Ricetta {
+export class Prodotto {
   id: number = 0
   nome: string = ''
   lavoro: any

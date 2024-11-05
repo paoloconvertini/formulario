@@ -15,7 +15,7 @@
       <td class="header">
         <input type="text"
                class="form-control input-search"
-               placeholder="materiaPrima"
+               placeholder="seleziona additivo"
                aria-label="materiaPrima"
                matInput
                [(ngModel)]="materia.materiaPrimaNome"
@@ -39,7 +39,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" color="warn">Indietro</button>
-  <button mat-button (click)="salva()" color="primary">Salva</button>
+  <button mat-raised-button (click)="salva()" color="primary" [disabled]="!prodotto || !prodotto.nome || !prodottoMateriePrimeList || prodottoMateriePrimeList.length === 0">Salva</button>
   <div *ngIf="showMsq">
     <div class="error-msg">{{msg}}</div>
   </div>

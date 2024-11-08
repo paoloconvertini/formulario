@@ -46,6 +46,7 @@ import {JwtModule} from "@auth0/angular-jwt";
 import { DettaglioProdottoDialogComponent } from './components/dettaglio-prodotto-dialog/dettaglio-prodotto-dialog.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AddMateriaPrimaDialogComponent} from "./components/add-materia-prima-dialog/add-materia-prima-dialog.component";
+import { TipoProdottoComponent } from './components/tipo-prodotto/tipo-prodotto.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -77,7 +78,8 @@ export const DateFormats = {
     ListiniDettaglioComponent,
     ResetPasswordComponent,
     DettaglioProdottoDialogComponent,
-    AddMateriaPrimaDialogComponent
+    AddMateriaPrimaDialogComponent,
+    TipoProdottoComponent
   ],
     imports: [
         MatDatepickerModule,

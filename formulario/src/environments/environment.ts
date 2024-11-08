@@ -14,7 +14,7 @@ export const environment = {
   MATERIE_PRIME_REGISTRO: 'materie-prime-registro',
   PRODOTTI:'prodotti',
   PRODOTTO_MATERIE_PRIME:'prodotto-materie-prime',
-  LISTINI:''
+  LISTINI:'listini'
 };
 
 /*

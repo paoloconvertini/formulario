@@ -50,9 +50,9 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loader = true;
        prodottoMateriePrime.materiaPrimaId = result.id;
        prodottoMateriePrime.materiaPrimaNome = result.nome;
+       prodottoMateriePrime.materiaPrimaTipologia = result.tipologia;
       }
     });
   }
@@ -76,6 +76,7 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
   }
 
   salva() {
+    this.loader = true;
     if(this.sommaPerc > 100) {
       this.msg = 'ATTENZIONE! La percentuale degli additivi è maggiore del 100%';
       this.showMsq = true;
@@ -83,8 +84,9 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
     }
     this.service.salva(this.prodottoMateriePrimeList).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
-          if (!res.error) {
-            this.getProdottoMateriePrime();
+          this.loader = false;
+          if (res && !res.error) {
+            this.dialogRef.close(true);
           }
         }
       });

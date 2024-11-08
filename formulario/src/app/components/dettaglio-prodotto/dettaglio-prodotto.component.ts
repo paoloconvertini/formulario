@@ -7,6 +7,8 @@ import {ProdottoMateriePrimeService} from "../../services/prodotto-materie-prime
 import {ProdottoMateriePrime} from "../../models/prodotto-materie-prime";
 import {DettaglioProdottoDialogComponent} from "../dettaglio-prodotto-dialog/dettaglio-prodotto-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {Listino} from "../../models/listino";
+import {ListiniService} from "../../services/listini.service";
 
 
 @Component({
@@ -14,18 +16,22 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './dettaglio-prodotto.component.html',
   styleUrls: ['./dettaglio-prodotto.component.css']
 })
-export class DettaglioProdottoComponent extends CommonListComponent implements OnInit{
+export class DettaglioProdottoComponent extends CommonListComponent implements OnInit {
 
-  id:any;
-  prodotto:Prodotto = new Prodotto();
+  id: any;
+  prodotto: Prodotto = new Prodotto();
   prodottoMateriePrimeList: ProdottoMateriePrime[] = [];
-  sommaPerc:number = 0
-  totMassa:number = 0
-  totMiscela20:number = 0
-  prezzo20:number = 0
-  prezzoUnitario:number = 0
+  listini: Listino[] = [];
+  lavoro: ProdottoMateriePrime = new ProdottoMateriePrime();
+  imballo: ProdottoMateriePrime = new ProdottoMateriePrime();
+  sommaPerc: number = 0
+  totMassa: number = 0
+  totMiscela20: number = 0
+  prezzo20: number = 0
+  prezzoUnitario: number = 0
 
-  constructor(private service: ProdottoMateriePrimeService, private router: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private service: ProdottoMateriePrimeService, private router: ActivatedRoute,
+              private dialog: MatDialog, private listinoService: ListiniService) {
     super();
   }
 
@@ -33,6 +39,7 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
     this.router.params.pipe(takeUntil(this.ngUnsubscribe)).subscribe((params: any) => {
       this.id = params.id;
       this.getProdottoMateriePrime();
+      this.getListiniByProdotto();
     });
   }
 
@@ -54,23 +61,39 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
     this.service.ricettaById(this.id).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data: any) => {
-          this.prodottoMateriePrimeList = data;
-          if(this.prodottoMateriePrimeList.length > 0) {
-            this.prodotto.nome = this.prodottoMateriePrimeList[0].prodottoNome;
-            this.prodotto.id = this.prodottoMateriePrimeList[0].prodottoId;
-            this.prodottoMateriePrimeList.forEach((m) => {
-              this.sommaPerc += m.percentuale;
-              this.totMassa += m.percentuale*20;
-              this.totMiscela20 += m.percentuale*20/100;
-              this.prezzo20 += m.materiaPrimaPrezzo*m.percentuale*20/100;
-              this.prezzoUnitario += m.materiaPrimaPrezzo*m.percentuale/100;
+          if (data && data.length > 0) {
+            this.prodotto.nome = data[0].prodottoNome;
+            this.prodotto.id = data[0].prodottoId;
+            data.forEach((m: any) => {
+              if (m.materiaPrimaTipologia === 'LA') {
+                this.lavoro = m;
+              } else if (m.materiaPrimaTipologia === 'IM') {
+                this.imballo = m;
+              } else {
+                this.prodottoMateriePrimeList.push(m);
+                this.sommaPerc += m.percentuale;
+                this.totMassa += m.percentuale * 20;
+                this.totMiscela20 += m.percentuale * 20 / 100;
+                this.prezzo20 += m.materiaPrimaPrezzo * m.percentuale * 20 / 100;
+                this.prezzoUnitario += m.materiaPrimaPrezzo * m.percentuale / 100;
+              }
             })
           }
-
-
           this.loader = false;
         }
       })
   }
 
+  getListiniByProdotto() {
+    this.loader = true;
+    this.listinoService.getAllByIdProdotto(this.id).pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (data: any) => {
+          if (data && data.length > 0) {
+            this.listini = data;
+          }
+          this.loader = false;
+        }
+      })
+  }
 }

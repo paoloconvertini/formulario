@@ -24,6 +24,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'tipo-prodotti',
+    component: ProdottiComponent
+  },
+  {
     path: 'materie-prime/w',
     component: MateriePrimeComponent
   },

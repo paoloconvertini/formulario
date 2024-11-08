@@ -8,6 +8,7 @@ export class ProdottoMateriePrime {
   materiaPrimaNome: any
   materiaPrimaUnitaMisura: any
   materiaPrimaPrezzo: any
+  materiaPrimaTipologia: any
   percentuale: any
   edit: boolean = false
 }

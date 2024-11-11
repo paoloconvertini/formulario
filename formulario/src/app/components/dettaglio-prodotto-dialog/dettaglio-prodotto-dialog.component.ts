@@ -141,8 +141,6 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
   }
 
   changeSacco() {
-    if(this.prodotto.unitMisuSacco === 'LT') {
-      this.showKg = false;
-    }
+    this.showKg = this.prodotto.unitMisuSacco !== 'LT';
   }
 }

@@ -1,6 +1,7 @@
-<div class="" >
+<div class="container" >
   <div class="row">
-    <div class="col-md-11">
+    <div class="col-md-11 ordine-title">
+      Listino {{id}}
     </div>
     <div class="col-md-1 float-end">
       <button mat-icon-button color="primary" (click)="generaListino()" matTooltip="genera listino">
@@ -25,11 +26,11 @@
           <tbody>
           <tr *ngFor="let listino of listini">
             <td class="header">{{listino.prodotto.nome}}</td>
-            <td>Kg. 25</td>
-            <td>Q.li 17.50</td>
+            <td>{{listino.prodotto.unitMisuSacco}}&nbsp;{{listino.prodotto.qtaSacco}}</td>
+            <td>Q.li {{listino.prodotto.qtaPedana}}</td>
             <td>{{listino.ricavo | currency: 'EUR':'symbol'}}</td>
-            <td>{{listino.ricavo*20/100 | currency: 'EUR':'symbol'}}</td>
-            <td>{{listino.ricavo*100 | currency: 'EUR':'symbol'}}</td>
+            <td>{{listino.ricavo*1.22 | currency: 'EUR':'symbol'}}</td>
+            <td>{{((listino.ricavo*1.22)/100)*listino.prodotto.qtaSacco | currency: 'EUR':'symbol'}}</td>
           </tr>
           </tbody>
         </table>

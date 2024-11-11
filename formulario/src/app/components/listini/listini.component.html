@@ -10,9 +10,9 @@
         <mat-drawer-container class="example-container">
           <mat-drawer mode="side" opened>
             <mat-nav-list>
-                <a mat-list-item name="listino" [routerLink]="'dettaglio/'+listino.id" routerLinkActive="active"
+                <a mat-list-item name="listino" [routerLink]="'dettaglio/'+listino.valoreListinoId" routerLinkActive="active"
                    *ngFor="let listino of listini">
-                  {{listino.nome}}
+                  Listino {{listino.valoreListinoId}}
                 </a>
             </mat-nav-list>
           </mat-drawer>

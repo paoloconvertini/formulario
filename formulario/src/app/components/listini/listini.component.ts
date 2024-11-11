@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonListComponent} from "../commonListComponent";
-import {ProdottiService} from "../../services/prodotti.service";
-import {MatDialog} from "@angular/material/dialog";
 import {takeUntil} from "rxjs";
 import {ListiniService} from "../../services/listini.service";
 
@@ -12,7 +10,7 @@ import {ListiniService} from "../../services/listini.service";
 })
 export class ListiniComponent extends CommonListComponent implements OnInit {
 
-  listini:any[] = []
+  listini: any[] = []
 
   constructor(private service: ListiniService) {
     super();
@@ -23,14 +21,14 @@ export class ListiniComponent extends CommonListComponent implements OnInit {
   }
 
   retrieveList(): void {
-  this.loader = true;
-  this.service.getRicavi().pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe({
-      next: (data: any[]) => {
-       this.listini = data;
-        this.loader = false;
-      }
-    })
-}
+    this.loader = true;
+    this.service.getAll().pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (data: any[]) => {
+          this.listini = data;
+          this.loader = false;
+        }
+      })
+  }
 
 }

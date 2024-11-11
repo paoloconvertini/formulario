@@ -7,6 +7,7 @@ import {DettaglioProdottoComponent} from "./components/dettaglio-prodotto/dettag
 import {ListiniDettaglioComponent} from "./components/listini-dettaglio/listini-dettaglio.component";
 import {LoginComponent} from "./components/login/login.component";
 import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
+import {TipoProdottoComponent} from "./components/tipo-prodotto/tipo-prodotto.component";
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'tipo-prodotti',
-    component: ProdottiComponent
+    component: TipoProdottoComponent
   },
   {
     path: 'materie-prime/w',

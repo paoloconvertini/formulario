@@ -47,6 +47,8 @@ import { DettaglioProdottoDialogComponent } from './components/dettaglio-prodott
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AddMateriaPrimaDialogComponent} from "./components/add-materia-prima-dialog/add-materia-prima-dialog.component";
 import { TipoProdottoComponent } from './components/tipo-prodotto/tipo-prodotto.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatChipsModule} from "@angular/material/chips";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -115,6 +117,8 @@ export const DateFormats = {
             }
         }),
         MatAutocompleteModule,
+        MatSelectModule,
+        MatChipsModule,
     ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy},

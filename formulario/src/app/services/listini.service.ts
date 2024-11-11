@@ -27,4 +27,12 @@ export class ListiniService extends CommonService{
   getAllByIdProdotto(id: number) : Observable<any> {
     return this.http.get<any>(this.url + `/${id}`);
   }
+
+  getAll() : Observable<any> {
+    return this.http.get<any>(this.url);
+  }
+
+  getListiniByIdValoreListino(id: any) : Observable<any> {
+    return this.http.get<any>(this.url + `/dettaglio/${id}`);
+  }
 }

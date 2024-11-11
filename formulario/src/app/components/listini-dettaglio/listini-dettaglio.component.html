@@ -23,13 +23,13 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let articolo of listino.articoli">
-            <td class="header">{{articolo.nome}}</td>
+          <tr *ngFor="let listino of listini">
+            <td class="header">{{listino.prodotto.nome}}</td>
             <td>Kg. 25</td>
             <td>Q.li 17.50</td>
-            <td>{{articolo.prezzo | currency: 'EUR':'symbol'}}</td>
-            <td>{{articolo.prezzo*20/100 | currency: 'EUR':'symbol'}}</td>
-            <td>{{articolo.prezzo*100 | currency: 'EUR':'symbol'}}</td>
+            <td>{{listino.ricavo | currency: 'EUR':'symbol'}}</td>
+            <td>{{listino.ricavo*20/100 | currency: 'EUR':'symbol'}}</td>
+            <td>{{listino.ricavo*100 | currency: 'EUR':'symbol'}}</td>
           </tr>
           </tbody>
         </table>

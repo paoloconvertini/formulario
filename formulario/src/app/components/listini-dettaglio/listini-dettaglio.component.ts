@@ -13,25 +13,26 @@ import {takeUntil} from "rxjs";
 export class ListiniDettaglioComponent extends CommonListComponent implements OnInit{
 
   id:any;
-  listino:any;
+  listini:any;
 
   constructor(private service: ListiniService, private router: ActivatedRoute) {
     super();
-    this.getListino();
+
   }
 
   ngOnInit(): void {
     this.router.params.pipe(takeUntil(this.ngUnsubscribe)).subscribe((params: any) => {
       this.id = params.id;
+      this.getListiniByIdValoreListino();
     });
   }
 
-   getListino() {
+  getListiniByIdValoreListino() {
      this.loader = true;
-     this.service.getListino(this.id).pipe(takeUntil(this.ngUnsubscribe))
+     this.service.getListiniByIdValoreListino(this.id).pipe(takeUntil(this.ngUnsubscribe))
        .subscribe({
          next: (data: any) => {
-           this.listino = data;
+           this.listini = data;
            this.loader = false;
          }
        })

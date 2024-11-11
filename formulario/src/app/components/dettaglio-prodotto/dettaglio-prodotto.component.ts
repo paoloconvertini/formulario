@@ -48,10 +48,10 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
       width: '50%',
       data: prodotto,
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.getProdottoMateriePrime();
+        this.getListiniByProdotto();
       }
     });
   }
@@ -64,6 +64,16 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
           if (data && data.length > 0) {
             this.prodotto.nome = data[0].prodottoNome;
             this.prodotto.id = data[0].prodottoId;
+            this.prodotto.tipoProdotto = data[0].tipoProdotto;
+            this.prodotto.unitMisuSacco = data[0].prodottoUnitMisuSacco;
+            this.prodotto.qtaSacco = data[0].prodottoQtaSacco;
+            this.prodotto.qtaPedana = data[0].prodottoQtaPedana;
+            this.prodottoMateriePrimeList = [];
+            this.sommaPerc = 0
+            this.totMassa = 0
+            this.totMiscela20 = 0
+            this.prezzo20 = 0
+            this.prezzoUnitario = 0
             data.forEach((m: any) => {
               if (m.materiaPrimaTipologia === 'LA') {
                 this.lavoro = m;

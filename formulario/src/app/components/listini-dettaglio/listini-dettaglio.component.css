@@ -2,3 +2,17 @@
   color: #728e58;
   font-weight: bold;
 }
+
+.categoria {
+  padding: 10px;
+  background: rgba(172, 213, 134, 0.6);
+  border-bottom: 1px solid;
+}
+
+.prodotto {
+  width: 50%
+}
+
+.prezzo {
+  width: 8%;
+}

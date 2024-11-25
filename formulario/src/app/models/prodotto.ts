@@ -9,5 +9,5 @@ export class Prodotto {
   unitMisuSacco: any
   materiePrime: MateriaPrima[] = []
   tipoProdotto: TipoProdotto = new TipoProdotto()
-
+  updateDate: any
 }

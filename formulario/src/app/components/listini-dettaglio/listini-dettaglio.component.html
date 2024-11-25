@@ -1,39 +1,52 @@
 <div class="container" >
   <div class="row">
-    <div class="col-md-11 ordine-title">
+    <div class="col-md-12 ordine-title">
       Listino {{id}}
     </div>
-    <div class="col-md-1 float-end">
-      <button mat-icon-button color="primary" (click)="generaListino()" matTooltip="genera listino">
-        <mat-icon aria-hidden="false" aria-label="close" fontIcon="picture_as_pdf" color="primary"></mat-icon>
+  </div>
+  <div class="row" style="margin: 3px 0">
+    <div class="col-md-8"></div>
+    <div class="col-md-2">
+      <button mat-flat-button color="primary" (click)="generaListino(0)" matTooltip="genera listino senza IVA">
+        LISTINO SENZA IVA
+        <mat-icon fontIcon="picture_as_pdf"></mat-icon>
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button mat-flat-button color="primary" (click)="generaListino(1)" matTooltip="genera listino con IVA">
+        LISTINO CON IVA
+        <mat-icon fontIcon="picture_as_pdf"></mat-icon>
       </button>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
       <div class="mat-elevation-z8">
-        <table class="table" style="margin: 0 20px">
-          <thead>
-          <tr>
-            <td class="header">Prodotto</td>
-            <td class="header">Sacco</td>
-            <td class="header">Pedana</td>
-            <td class="header">Prezzo imp.a Q.le Iva esclusa</td>
-            <td class="header">Prezzo a Q.le con Iva</td>
-            <td class="header">Prezzo a sacco Iva compresa</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let listino of listini">
-            <td class="header">{{listino.prodotto.nome}}</td>
-            <td>{{listino.prodotto.unitMisuSacco}}&nbsp;{{listino.prodotto.qtaSacco}}</td>
-            <td>Q.li {{listino.prodotto.qtaPedana}}</td>
-            <td>{{listino.ricavo | currency: 'EUR':'symbol'}}</td>
-            <td>{{listino.ricavo*1.22 | currency: 'EUR':'symbol'}}</td>
-            <td>{{((listino.ricavo*1.22)/100)*listino.prodotto.qtaSacco | currency: 'EUR':'symbol'}}</td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="row text" *ngFor="let cat of listini; index as i" style="margin: 0 20px">
+          <div class="col-md-12 categoria">{{cat.prodottoPdfDtos[0].prodottoTipoProdottoDescrizione}}</div>
+          <table class="table" style="margin: 0 20px">
+            <thead>
+            <tr>
+              <td class="header prodotto">Prodotto</td>
+              <td class="header">Sacco</td>
+              <td class="header">Pedana</td>
+              <td class="header prezzo">Imp. -Iva</td>
+              <td class="header prezzo">Imp. +Iva</td>
+              <td class="header prezzo">Imp. +Iva</td>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let listino of cat.prodottoPdfDtos">
+                <td class="header prodotto">{{listino.prodottoNome}}</td>
+                <td>{{listino.prodottoUnitMisuSacco}}&nbsp;{{listino.prodottoQtaSacco}}</td>
+                <td>Q.LI {{listino.prodottoQtaPedana}}</td>
+                <td class="prezzo">{{listino.ricavo | currency: 'EUR':'symbol'}}/Q.le</td>
+                <td class="prezzo">{{listino.ricavo*1.22 | currency: 'EUR':'symbol'}}/Q.le</td>
+                <td class="prezzo">{{((listino.ricavo*1.22)/100)*listino.prodottoQtaSacco | currency: 'EUR':'symbol'}}/Sacco</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

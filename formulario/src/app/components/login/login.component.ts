@@ -17,12 +17,14 @@ export class LoginComponent extends BaseComponent{
     password: new FormControl(null, Validators.required),
   });
   hide = true;
+  loader: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private sanckbar: MatSnackBar) {
     super();
   }
 
   submitForm() {
+    this.loader = true;
     if (this.form.valid) {
       this.authService.login({
         username: this.username.value,
@@ -32,6 +34,7 @@ export class LoginComponent extends BaseComponent{
            this.router.navigate(['/materie-prime']);
         },
         error: (e) => {
+          this.loader = false;
           if (e) {
             this.sanckbar.open('Utente non trovato', 'Chiudi', {
               duration: 2000, horizontalPosition: 'center', verticalPosition: 'top'

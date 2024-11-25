@@ -5,6 +5,7 @@ import {ProdottiService} from "../../services/prodotti.service";
 import {takeUntil} from "rxjs";
 import {Prodotto} from "../../models/prodotto";
 import {DettaglioProdottoDialogComponent} from "../dettaglio-prodotto-dialog/dettaglio-prodotto-dialog.component";
+import {Filtro} from "../../models/filtro";
 
 @Component({
   selector: 'app-ricette',
@@ -13,8 +14,10 @@ import {DettaglioProdottoDialogComponent} from "../dettaglio-prodotto-dialog/det
 })
 export class ProdottiComponent extends CommonListComponent implements OnInit {
 
-  prodotti:any[] = [];
+  prodotti:Prodotto[] = [];
+  filteredProdotti:Prodotto[] = [];
   active: boolean = false;
+  filtro: Filtro = new Filtro();
 
   constructor(private service: ProdottiService, private dialog: MatDialog) {
     super();
@@ -30,10 +33,10 @@ export class ProdottiComponent extends CommonListComponent implements OnInit {
       .subscribe({
         next: (data: any[]) => {
           this.prodotti = data;
-          this.loader = false;
-        },
-        error: (e: any) => {
-          console.error(e);
+          this.filteredProdotti = data;
+          if(this.filtro.searchText){
+            this.applyFiltro();
+          }
           this.loader = false;
         }
       })
@@ -50,5 +53,12 @@ export class ProdottiComponent extends CommonListComponent implements OnInit {
         this.retrieveList();
       }
     });
+  }
+
+  applyFiltro() {
+    const searchTextLower = this.filtro.searchText.toLowerCase();
+    this.filteredProdotti = this.prodotti.filter(prodotto =>
+      prodotto.nome.toLowerCase().includes(searchTextLower)
+    );
   }
 }

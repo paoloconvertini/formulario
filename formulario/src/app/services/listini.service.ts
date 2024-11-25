@@ -16,14 +16,6 @@ export class ListiniService extends CommonService{
     super(http, url);
   }
 
-  getRicavi(): Observable<any> {
-    return this.http.get<any>('ricavi');
-  }
-
-  getListino(id: any) : Observable<any> {
-    return this.http.get<any>(`/listini/dettaglio/${id}`);
-  }
-
   getAllByIdProdotto(id: number) : Observable<any> {
     return this.http.get<any>(this.url + `/${id}`);
   }
@@ -34,5 +26,12 @@ export class ListiniService extends CommonService{
 
   getListiniByIdValoreListino(id: any) : Observable<any> {
     return this.http.get<any>(this.url + `/dettaglio/${id}`);
+  }
+
+  generaListino(id:any, iva:any): Observable<any> {
+    const httpOptions = {
+      responseType: 'blob' as 'json'
+    };
+    return this.http.get(`${this.url}/genera-listino/${id}/${iva}`, httpOptions);
   }
 }

@@ -23,24 +23,33 @@
     <div class="col-lg-3">
       <mat-form-field appearance="fill" style="margin: 0 25px">
         <mat-label>Scegli unità di misura</mat-label>
-        <mat-select [(ngModel)]="prodotto.unitMisuSacco" (ngModelChange)="changeSacco()">
+        <mat-select [(ngModel)]="prodotto.unitMisuSacco">
           <mat-option [value]="'KG'">KG</mat-option>
           <mat-option [value]="'LT'">LT</mat-option>
+          <mat-option [value]="'PZ'">PZ</mat-option>
+          <mat-option [value]="'QL'">QL</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div class="col-lg-3">
       <mat-form-field appearance="fill" style="margin: 0 25px">
         <mat-label>Seleziona qta sacco</mat-label>
-        <mat-select [(ngModel)]="prodotto.qtaSacco" *ngIf="showKg">
+        <mat-select [(ngModel)]="prodotto.qtaSacco" *ngIf="prodotto.unitMisuSacco === 'KG'">
+          <mat-option [value]="5">5</mat-option>
           <mat-option [value]="15">15</mat-option>
           <mat-option [value]="20">20</mat-option>
           <mat-option [value]="25">25</mat-option>
           <mat-option [value]="30">30</mat-option>
         </mat-select>
-        <mat-select [(ngModel)]="prodotto.qtaSacco" *ngIf="!showKg">
+        <mat-select [(ngModel)]="prodotto.qtaSacco" *ngIf="prodotto.unitMisuSacco === 'LT'">
           <mat-option [value]="1">1</mat-option>
           <mat-option [value]="5">5</mat-option>
+        </mat-select>
+        <mat-select [(ngModel)]="prodotto.qtaSacco" *ngIf="prodotto.unitMisuSacco === 'PZ'">
+          <mat-option [value]="1">1</mat-option>
+        </mat-select>
+        <mat-select [(ngModel)]="prodotto.qtaSacco" *ngIf="prodotto.unitMisuSacco === 'QL'">
+          <mat-option [value]="1">1</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

@@ -32,7 +32,6 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
   msg: string = '';
   showMsq: boolean = false;
   tipoProdotti: any;
-  showKg: boolean = true;
 
   constructor(    public dialogRef: MatDialogRef<DettaglioProdottoDialogComponent>,
                   private materiePrimeService: MateriePrimeService,
@@ -46,7 +45,6 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
   ngOnInit(): void {
     this.prodotto = this.data;
     if(this.prodotto && this.prodotto.id && this.prodotto.id !== 0) {
-      this.changeSacco();
       this.getTipoProdotti();
     }
   }
@@ -140,7 +138,4 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
       })
   }
 
-  changeSacco() {
-    this.showKg = this.prodotto.unitMisuSacco !== 'LT';
-  }
 }

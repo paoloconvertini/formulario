@@ -38,10 +38,6 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
               this.applyFilter();
             }
             this.loader = false;
-          },
-          error: (e: any) => {
-            console.error(e);
-            this.loader = false;
           }
         })
   }
@@ -80,8 +76,7 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
             if (!res.error) {
               this.retrieveList();
             }
-          },
-          error: (e) => console.error(e)
+          }
         });
       }
     });
@@ -95,11 +90,10 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
     if(materiaPrima.id){
       this.service.aggiorna(dto, materiaPrima.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
-          if (!res.error) {
+          if (res && !res.error) {
             this.retrieveList();
           }
-        },
-        error: (e) => console.error(e)
+        }
       });
     } else {
       this.service.save(dto).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
@@ -107,8 +101,7 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
           if (!res.error) {
             this.retrieveList();
           }
-        },
-        error: (e) => console.error(e)
+        }
       });
     }
   }

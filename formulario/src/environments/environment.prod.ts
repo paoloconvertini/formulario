@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  baseAuthUrl: '',
-  baseUrl:'',
+  baseAuthUrl: (window as any)['env']['baseAuthUrl'] || 'http://10.0.0.7:8081/api/',
+  baseUrl: (window as any)["env"]['baseUrl'] || 'http://10.0.0.17:8080/api/',
   TOKEN_KEY: 'access_token',
   LOGIN: 'login',
   USERNAME: 'username',

@@ -47,6 +47,7 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
     const dialogRef = this.dialog.open(DettaglioProdottoDialogComponent, {
       width: '50%',
       data: prodotto,
+      maxHeight: '90vh'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

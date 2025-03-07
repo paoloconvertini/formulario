@@ -113,7 +113,7 @@ export const DateFormats = {
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                allowedDomains: ['localhost:8080', 'localhost:8081']
+                allowedDomains: ['localhost:8080', 'localhost:8081', '10.0.0.17:8080', '10.0.0.17:8081']
             }
         }),
         MatAutocompleteModule,

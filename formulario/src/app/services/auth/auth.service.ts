@@ -42,6 +42,9 @@ export class AuthService {
         if (user.ruolo!.includes('Admin')) {
           localStorage.setItem(environment.ADMIN, 'Y');
         }
+        if (user.ruolo!.includes('User')) {
+          localStorage.setItem(environment.USERNAME, 'Y');
+        }
       }),
       tap(() => this.snackbar.open('Login successfull', 'Chiudi', {
         duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'

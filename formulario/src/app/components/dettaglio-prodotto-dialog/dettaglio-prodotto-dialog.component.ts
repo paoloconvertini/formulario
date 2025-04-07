@@ -32,6 +32,9 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
   msg: string = '';
   showMsq: boolean = false;
   tipoProdotti: any;
+  tipoProdotto: any;
+  unitMisuSacco: any;
+  qtaSacco: any;
 
   constructor(    public dialogRef: MatDialogRef<DettaglioProdottoDialogComponent>,
                   private materiePrimeService: MateriePrimeService,

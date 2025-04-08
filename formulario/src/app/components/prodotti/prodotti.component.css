@@ -1,6 +1,17 @@
-.example-container {
-  min-height: 400px;
+.sidenav-container {
+  height: 100vh;
 }
+
+.sidenav {
+  width: 250px;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.main-content {
+  padding: 20px;
+}
+
 
 .active {
   opacity: unset!important;
@@ -9,6 +20,7 @@
   background-color: transparent!important;
 }
 
-.mat-drawer-content {
-  margin: 0 5px 0 105px;
+.nome-prodotto{
+  white-space: normal;
+  overflow-wrap: break-word;
 }

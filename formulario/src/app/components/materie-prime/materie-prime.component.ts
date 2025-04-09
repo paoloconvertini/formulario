@@ -16,7 +16,7 @@ import {MateriaPrimaDto} from "../../models/materia-prima-dto";
 })
 export class MateriePrimeComponent extends CommonListComponent implements OnInit {
 
-  displayedColumns: string[] = ['nome', 'prezzo', 'u.m.', 'azioni'];
+  displayedColumns: string[] = ['nome', 'prezzo', 'u.m.', 'tipologia', 'azioni'];
   isAdmin: boolean = false;
   filtro: Filtro = new Filtro();
 
@@ -87,11 +87,17 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
     dto.nome = materiaPrima.nome;
     dto.unitaMisura = materiaPrima.unitaMisura;
     dto.prezzo = materiaPrima.prezzo;
+    dto.tipologia = materiaPrima.tipologia;
     if(materiaPrima.id){
       this.service.aggiorna(dto, materiaPrima.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
           if (res && !res.error) {
-            this.retrieveList();
+            // Trova l'indice del record originale nella lista
+            const index = this.dataSource.data.findIndex((el:any) => el.id === materiaPrima.id);
+            if (index !== -1) {
+              this.dataSource.data[index] = { ...res, edit: false }; // aggiorna con i nuovi dati + disattiva edit
+              this.dataSource._updateChangeSubscription(); // forza refresh della tabella
+            }
           }
         }
       });
@@ -122,4 +128,5 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
     });
     dialogRef.afterClosed().subscribe();
   }
+
 }

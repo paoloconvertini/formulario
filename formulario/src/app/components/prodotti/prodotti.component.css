@@ -24,3 +24,9 @@
   white-space: normal;
   overflow-wrap: break-word;
 }
+
+.mat-mdc-list-item {
+  min-height: fit-content;
+  border-bottom: 1px solid;
+  margin-bottom: 5px;
+}

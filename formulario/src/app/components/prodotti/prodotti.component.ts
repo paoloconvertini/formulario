@@ -44,7 +44,7 @@ export class ProdottiComponent extends CommonListComponent implements OnInit {
 
   creaNuovo() {
     const dialogRef = this.dialog.open(DettaglioProdottoDialogComponent, {
-      width: '50%',
+      width: '95%',
       data: {prodotto: new Prodotto()},
     });
 

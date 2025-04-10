@@ -23,25 +23,41 @@
         </div>
       </div>
       <div class="mat-elevation-z8">
-        <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav-container class="sidenav-container" autosize>
+          <!-- Albero a sinistra -->
           <mat-sidenav mode="side" opened class="sidenav">
-            <mat-nav-list>
-<!--              <mat-list-item class="nome-prodotto" mat-list-item name="ricetta" [routerLink]="'dettaglio/'+prodotto.id"-->
-<!--                 *ngFor="let prodotto of filteredProdotti" routerLinkActive="active">{{prodotto.nome}}&nbsp;-->
-<!--              </mat-list-item>-->
-              <mat-list-item *ngFor="let prodotto of filteredProdotti" name="ricetta" [routerLink]="'dettaglio/'+prodotto.id"
-                             routerLinkActive="active">
-                <div class="nome-prodotto">
-                  {{prodotto.nome}}&nbsp;
-                </div>
-              </mat-list-item>
-            </mat-nav-list>
+            <mat-tree [dataSource]="ds" [treeControl]="treeControl">
+              <!-- Nodo padre: TipoProdotto -->
+              <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                <button mat-icon-button matTreeNodeToggle (click)="onToggleNode(node)">
+                  <mat-icon>{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}</mat-icon>
+                </button>
+                <strong>{{ node.name }}</strong>
+                <mat-progress-spinner
+                  *ngIf="node.node.isLoading"
+                  diameter="16"
+                  mode="indeterminate"
+                  class="spinner"
+                ></mat-progress-spinner>
+              </mat-tree-node>
+              <!-- Nodo foglia: Prodotto -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <a
+                [routerLink]="'dettaglio/'+ node.node.prodotto.id"
+                routerLinkActive="active-node"
+                class="clickable tree-link"
+              >
+                {{ node.name }}
+              </a>
+            </mat-tree-node>
+            </mat-tree>
           </mat-sidenav>
-
+          <!-- Contenuto centrale: router-outlet per il dettaglio -->
           <mat-sidenav-content class="main-content">
             <router-outlet></router-outlet>
           </mat-sidenav-content>
         </mat-sidenav-container>
+
       </div>
     </div>
   </div>

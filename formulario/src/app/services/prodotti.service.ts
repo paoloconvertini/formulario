@@ -26,4 +26,8 @@ export class ProdottiService extends CommonService{
   getRicetta(id: any): Observable<any> {
     return this.http.get<any>(this.url);
   }
+
+  getProdottiByTipo(idTipo: number): Observable<any> {
+    return this.http.get<any>(this.url+`/by-tipo/${idTipo}`);
+  }
 }

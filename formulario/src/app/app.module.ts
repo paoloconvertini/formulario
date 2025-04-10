@@ -49,6 +49,8 @@ import {AddMateriaPrimaDialogComponent} from "./components/add-materia-prima-dia
 import { TipoProdottoComponent } from './components/tipo-prodotto/tipo-prodotto.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
+import {MatTreeModule} from "@angular/material/tree";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -83,43 +85,45 @@ export const DateFormats = {
     AddMateriaPrimaDialogComponent,
     TipoProdottoComponent
   ],
-    imports: [
-        MatDatepickerModule,
-        MatMomentDateModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatMenuModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatProgressSpinnerModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        HttpClientModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatInputModule,
-        MatGridListModule,
-        MatListModule,
-        MatDividerModule,
-        MatSidenavModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: tokenGetter,
-                allowedDomains: ['localhost:8080', 'localhost:8081', '10.0.0.17:8080', '10.0.0.17:8081']
-            }
-        }),
-        MatAutocompleteModule,
-        MatSelectModule,
-        MatChipsModule,
-    ],
+  imports: [
+    MatDatepickerModule,
+    MatMomentDateModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatGridListModule,
+    MatListModule,
+    MatDividerModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:8080', 'localhost:8081', '10.0.0.17:8080', '10.0.0.17:8081']
+      }
+    }),
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatTreeModule,
+    MatProgressBarModule,
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },

@@ -14,6 +14,6 @@ export class ProdottoMateriePrime {
   materiaPrimaTipologia: any
   tipoProdottoId: any
   tipoProdottoDescrizione: any
-  percentuale: any
+  percentuale: number = 0
   edit: boolean = false
 }

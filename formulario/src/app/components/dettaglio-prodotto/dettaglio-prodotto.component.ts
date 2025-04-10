@@ -81,7 +81,7 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
                 this.lavoro = m;
               } else if (m.materiaPrimaTipologia === 'IM') {
                 this.imballo = m;
-              } else {
+              } else if(m.percentuale > 0){
                 this.prodottoMateriePrimeList.push(m);
                 this.sommaPerc += m.percentuale;
                 this.totMassa += m.percentuale * 20;

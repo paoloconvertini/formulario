@@ -95,7 +95,6 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
       })
       return;
     }
-    this.loader = true;
     if(!this.prodottoMateriePrimeList[0].prodottoId || this.prodottoMateriePrimeList[0].prodottoId === 0) {
       this.prodottoMateriePrimeList[0].prodottoNome = this.prodotto.nome;
     }
@@ -104,6 +103,16 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
     this.prodottoMateriePrimeList[0].prodottoUnitMisuSacco = this.prodotto.unitMisuSacco;
     this.prodottoMateriePrimeList[0].prodottoQtaSacco = this.prodotto.qtaSacco;
     this.prodottoMateriePrimeList[0].prodottoQtaPedana = this.prodotto.qtaPedana;
+    let error = false;
+    this.prodottoMateriePrimeList.forEach(m => {
+      if(!m.materiaPrimaNome){
+        error = true;
+      }
+    })
+    if(error) {
+      return;
+    }
+    this.loader = true;
     this.service.salva(this.prodottoMateriePrimeList).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
           this.loader = false;

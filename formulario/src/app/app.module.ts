@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,6 +70,8 @@ export const DateFormats = {
   },
 };
 
+registerLocaleData(localeIt);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,6 +134,7 @@ export const DateFormats = {
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
     { provide: MAT_DATE_FORMATS, useValue: DateFormats},
     { provide: MAT_DATE_LOCALE, useValue: 'it-IT'},
+    {provide: LOCALE_ID, useValue: 'it'},
     { provide: HTTP_INTERCEPTORS, useClass: ForbiddenInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

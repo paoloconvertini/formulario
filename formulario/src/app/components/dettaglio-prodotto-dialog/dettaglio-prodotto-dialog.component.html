@@ -92,6 +92,7 @@
                  required
                  disabled
           >
+          <div *ngIf="!materia.materiaPrimaNome" class="error-msg">Inserire una materia prima</div>
           <button (click)="cercaMateriaPrima(materia)" mat-icon-button matTooltip="Cerca materia prima" >
             <mat-icon aria-hidden="false" aria-label="save" fontIcon="search" color="primary"></mat-icon>
           </button>

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonListComponent} from "../commonListComponent";
-import {ProdottiService} from "../../services/prodotti.service";
 import {ActivatedRoute} from "@angular/router";
 import {ListiniService} from "../../services/listini.service";
 import {takeUntil} from "rxjs";
@@ -53,8 +52,7 @@ export class ListiniDettaglioComponent extends CommonListComponent implements On
             let blob = new Blob([data], { type: 'application/pdf' });
             let url= window.URL.createObjectURL(blob);
             a.href = url;
-            let filename = 'Listino_' + this.id + '.pdf';
-            a.download = filename;
+            a.download = 'Listino_' + this.id + '.pdf';
             a.click();
             window.URL.revokeObjectURL(url);
           } else {
@@ -62,6 +60,31 @@ export class ListiniDettaglioComponent extends CommonListComponent implements On
               duration: 5000, horizontalPosition: 'center', verticalPosition: 'top'
             });
           }
+        }
+      })
+  }
+
+  stampaListino(iva: any) {
+    this.loader = true;
+    this.service.generaListino(this.id, iva).pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (data) => {
+          if (data) {
+            let blob = new Blob([data], { type: 'application/pdf' });
+            const fileURL = window.URL.createObjectURL(blob);
+
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none'; // nasconde l'iframe
+            iframe.src = fileURL;
+
+            document.body.appendChild(iframe);
+
+            iframe.onload = () => {
+              iframe.contentWindow?.focus();
+              iframe.contentWindow?.print();
+            };
+          }
+          this.loader = false;
         }
       })
   }

@@ -1,0 +1,63 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.tree-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.tree-link:hover {
+  background-color: #eeeeee;
+}
+
+.active-node {
+  background-color: #c5cae9; /* Colore evidenziato */
+  font-weight: bold;
+}
+
+
+.active {
+  opacity: unset!important;
+  color: #728E58 !important;
+  font-weight: bolder !important;
+  background-color: transparent!important;
+}
+
+.nome-prodotto{
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.mat-mdc-list-item {
+  min-height: fit-content;
+  border-bottom: 1px solid;
+  margin-bottom: 5px;
+}
+
+.example-container {
+  height: 100vh;
+}
+
+.clickable {
+  cursor: pointer;
+  color: #3f51b5;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+}
+

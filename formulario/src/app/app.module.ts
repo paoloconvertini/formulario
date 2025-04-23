@@ -10,6 +10,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { MateriePrimeComponent } from './components/materie-prime/materie-prime.component';
+import { MateriePrimeWeberComponent } from './components/materie-prime-weber/materie-prime-weber.component';
 import { ProdottiComponent } from './components/prodotti/prodotti.component';
 import { ListiniComponent } from './components/listini/listini.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -53,6 +54,18 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {ProdottiWeberComponent} from "./components/prodotti-weber/prodotti-weber.component";
+import {TipoProdottoWeberComponent} from "./components/tipo-prodotto-weber/tipo-prodotto-weber.component";
+import {
+  DettaglioProdottoWeberComponent
+} from "./components/dettaglio-prodotto-weber/dettaglio-prodotto-weber.component";
+import {StoricoDialogWeberComponent} from "./components/storico-dialog-weber/storico-dialog-weber.component";
+import {
+  DettaglioProdottoDialogWeberComponent
+} from "./components/dettaglio-prodotto-dialog-weber/dettaglio-prodotto-dialog-weber.component";
+import {
+  AddMateriaPrimaDialogWeberComponent
+} from "./components/add-materia-prima-dialog-weber/add-materia-prima-dialog-weber.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -78,16 +91,23 @@ registerLocaleData(localeIt);
     LoginComponent,
     NavigationComponent,
     MateriePrimeComponent,
+    MateriePrimeWeberComponent,
     ProdottiComponent,
+    ProdottiWeberComponent,
     ListiniComponent,
     ConfirmDialogComponent,
     DettaglioProdottoComponent,
+    DettaglioProdottoWeberComponent,
     StoricoDialogComponent,
+    StoricoDialogWeberComponent,
     ListiniDettaglioComponent,
     ResetPasswordComponent,
     DettaglioProdottoDialogComponent,
+    DettaglioProdottoDialogWeberComponent,
     AddMateriaPrimaDialogComponent,
-    TipoProdottoComponent
+    AddMateriaPrimaDialogWeberComponent,
+    TipoProdottoComponent,
+    TipoProdottoWeberComponent
   ],
   imports: [
     MatDatepickerModule,

@@ -1,0 +1,66 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-lg-10 col-md-10 ordine-title">
+      Prodotti
+    </div>
+    <div class=" col-lg-2 col-md-2" style="margin-bottom: 10px">
+      <button class="float-end" mat-raised-button color="primary" (click)="creaNuovo()">Crea nuovo Prodotto</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-5">
+          <mat-form-field>
+            <mat-label>Cerca...</mat-label>
+            <input matInput (keyup)="applyFiltro()" [(ngModel)]="filtro.searchText">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+          <button mat-raised-button color="warn" (click)="filtro.searchText = ''; applyFiltro()">
+            Reset
+          </button>
+        </div>
+      </div>
+      <div class="mat-elevation-z8">
+        <mat-sidenav-container class="sidenav-container" autosize>
+          <!-- Albero a sinistra -->
+          <mat-sidenav mode="side" opened class="sidenav">
+            <mat-tree [dataSource]="ds" [treeControl]="treeControl">
+              <!-- Nodo padre: TipoProdotto -->
+              <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                <button mat-icon-button matTreeNodeToggle (click)="onToggleNode(node)">
+                  <mat-icon>{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}</mat-icon>
+                </button>
+                <strong>{{ node.name }}</strong>
+                <mat-progress-spinner
+                  *ngIf="node.node.isLoading"
+                  diameter="16"
+                  mode="indeterminate"
+                  class="spinner"
+                ></mat-progress-spinner>
+              </mat-tree-node>
+              <!-- Nodo foglia: Prodotto -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <a
+                [routerLink]="'dettaglio/'+ node.node.prodotto.id"
+                routerLinkActive="active-node"
+                class="clickable tree-link"
+              >
+                {{ node.name }}
+              </a>
+            </mat-tree-node>
+            </mat-tree>
+          </mat-sidenav>
+          <!-- Contenuto centrale: router-outlet per il dettaglio -->
+          <mat-sidenav-content class="main-content">
+            <router-outlet></router-outlet>
+          </mat-sidenav-content>
+        </mat-sidenav-container>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

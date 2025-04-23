@@ -9,14 +9,20 @@ import {DettaglioProdottoDialogComponent} from "../dettaglio-prodotto-dialog/det
 import {MatDialog} from "@angular/material/dialog";
 import {Listino} from "../../models/listino";
 import {ListiniService} from "../../services/listini.service";
+import {
+  ProdottoMateriePrimeWeberService
+} from "../../services/weber/prodotto-materie-prime-weber/prodotto-materie-prime-weber.service";
+import {
+  DettaglioProdottoDialogWeberComponent
+} from "../dettaglio-prodotto-dialog-weber/dettaglio-prodotto-dialog-weber.component";
 
 
 @Component({
   selector: 'app-dettaglio-prodotto',
-  templateUrl: './dettaglio-prodotto.component.html',
-  styleUrls: ['./dettaglio-prodotto.component.css']
+  templateUrl: './dettaglio-prodotto-weber.component.html',
+  styleUrls: ['./dettaglio-prodotto-weber.component.css']
 })
-export class DettaglioProdottoComponent extends CommonListComponent implements OnInit {
+export class DettaglioProdottoWeberComponent extends CommonListComponent implements OnInit {
 
   id: any;
   prodotto: Prodotto = new Prodotto();
@@ -30,7 +36,7 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
   prezzo20: number = 0
   prezzoUnitario: number = 0
 
-  constructor(private service: ProdottoMateriePrimeService, private router: ActivatedRoute,
+  constructor(private service: ProdottoMateriePrimeWeberService, private router: ActivatedRoute,
               private dialog: MatDialog, private listinoService: ListiniService) {
     super();
   }
@@ -39,12 +45,12 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
     this.router.params.pipe(takeUntil(this.ngUnsubscribe)).subscribe((params: any) => {
       this.id = params.id;
       this.getProdottoMateriePrime();
-      this.getListiniByProdotto();
+      // this.getListiniByProdotto();
     });
   }
 
   modifica(prodotto: any) {
-    const dialogRef = this.dialog.open(DettaglioProdottoDialogComponent, {
+    const dialogRef = this.dialog.open(DettaglioProdottoDialogWeberComponent, {
       width: '950%',
       data: prodotto,
       maxHeight: '90vh'
@@ -52,7 +58,7 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.getProdottoMateriePrime();
-        this.getListiniByProdotto();
+      //  this.getListiniByProdotto();
       }
     });
   }
@@ -98,7 +104,7 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
       })
   }
 
-  getListiniByProdotto() {
+/*  getListiniByProdotto() {
     this.loader = true;
     this.listinoService.getAllByIdProdotto(this.id).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
@@ -109,5 +115,5 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
           this.loader = false;
         }
       })
-  }
+  }*/
 }

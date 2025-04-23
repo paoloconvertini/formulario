@@ -1,0 +1,10 @@
+.mat-elevation-z8{
+  width: 100%;
+  overflow: auto;
+  margin: auto 0;
+}
+
+.header {
+  color: #728e58;
+  font-weight: bold;
+}

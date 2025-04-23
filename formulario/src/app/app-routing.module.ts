@@ -8,6 +8,12 @@ import {ListiniDettaglioComponent} from "./components/listini-dettaglio/listini-
 import {LoginComponent} from "./components/login/login.component";
 import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
 import {TipoProdottoComponent} from "./components/tipo-prodotto/tipo-prodotto.component";
+import {MateriePrimeWeberComponent} from "./components/materie-prime-weber/materie-prime-weber.component";
+import {TipoProdottoWeberComponent} from "./components/tipo-prodotto-weber/tipo-prodotto-weber.component";
+import {
+  DettaglioProdottoWeberComponent
+} from "./components/dettaglio-prodotto-weber/dettaglio-prodotto-weber.component";
+import {ProdottiWeberComponent} from "./components/prodotti-weber/prodotti-weber.component";
 
 const routes: Routes = [
   {
@@ -29,16 +35,20 @@ const routes: Routes = [
     component: TipoProdottoComponent
   },
   {
-    path: 'materie-prime/w',
-    component: MateriePrimeComponent
+    path: 'tipo-prodotti-weber',
+    component: TipoProdottoWeberComponent
   },
   {
-    path: 'prodotti/w',
-    component: ProdottiComponent,
+    path: 'materie-prime-weber',
+    component: MateriePrimeWeberComponent
+  },
+  {
+    path: 'prodotti-weber',
+    component: ProdottiWeberComponent,
     children: [
       {
         path: 'dettaglio/:id',
-        component: DettaglioProdottoComponent
+        component: DettaglioProdottoWeberComponent
       }
     ]
   },

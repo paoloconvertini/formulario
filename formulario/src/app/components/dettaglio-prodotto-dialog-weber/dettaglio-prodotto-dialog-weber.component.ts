@@ -1,16 +1,18 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MateriaPrima} from "../../models/materiaPrima";
 import {takeUntil} from "rxjs";
 import {BaseComponent} from "../baseComponent";
-import {MateriePrimeService} from "../../services/materie-prime.service";
-import {MateriaPrimaDto} from "../../models/materia-prima-dto";
-import {ProdottoMateriePrimeService} from "../../services/prodotto-materie-prime/prodotto-materie-prime.service";
 import {ProdottoMateriePrime} from "../../models/prodotto-materie-prime";
-import {AddMateriaPrimaDialogComponent} from "../add-materia-prima-dialog/add-materia-prima-dialog.component";
-import {TipoProdottoService} from "../../services/tipo-prodotto.service";
 import {TipoProdotto} from "../../models/tipo-prodotto";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MateriePrimeWeberService} from "../../services/weber/materie-prime-weber.service";
+import {
+  ProdottoMateriePrimeWeberService
+} from "../../services/weber/prodotto-materie-prime-weber/prodotto-materie-prime-weber.service";
+import {TipoProdottoWeberService} from "../../services/weber/tipo-prodotto-weber.service";
+import {
+  AddMateriaPrimaDialogWeberComponent
+} from "../add-materia-prima-dialog-weber/add-materia-prima-dialog-weber.component";
 
 export interface DialogData {
   prodotto: any;
@@ -18,10 +20,10 @@ export interface DialogData {
 
 @Component({
   selector: 'app-dettaglio-prodotto-dialog',
-  templateUrl: './dettaglio-prodotto-dialog.component.html',
-  styleUrls: ['./dettaglio-prodotto-dialog.component.css']
+  templateUrl: './dettaglio-prodotto-dialog-weber.component.html',
+  styleUrls: ['./dettaglio-prodotto-dialog-weber.component.css']
 })
-export class DettaglioProdottoDialogComponent extends BaseComponent implements OnInit{
+export class DettaglioProdottoDialogWeberComponent extends BaseComponent implements OnInit{
 
   loader = false;
   prodotto:any;
@@ -36,11 +38,11 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
   unitMisuSacco: any;
   qtaSacco: any;
 
-  constructor(    public dialogRef: MatDialogRef<DettaglioProdottoDialogComponent>,
-                  private materiePrimeService: MateriePrimeService,
-                  private service: ProdottoMateriePrimeService,
+  constructor(    public dialogRef: MatDialogRef<DettaglioProdottoDialogWeberComponent>,
+                  private materiePrimeService: MateriePrimeWeberService,
+                  private service: ProdottoMateriePrimeWeberService,
                   @Inject(MAT_DIALOG_DATA) public data: DialogData,
-                  private tipoProdottiService: TipoProdottoService,
+                  private tipoProdottiService: TipoProdottoWeberService,
                   private dialog: MatDialog, private snackBar: MatSnackBar) {
     super();
   }
@@ -55,7 +57,7 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
   }
 
   cercaMateriaPrima(prodottoMateriePrime: ProdottoMateriePrime) {
-    const dialogRef = this.dialog.open(AddMateriaPrimaDialogComponent, {
+    const dialogRef = this.dialog.open(AddMateriaPrimaDialogWeberComponent, {
       width: '30%'
     });
     dialogRef.afterClosed().subscribe(result => {

@@ -11,5 +11,10 @@ export const environment = {
   PRODOTTI:'prodotti',
   PRODOTTO_MATERIE_PRIME:'prodotto-materie-prime',
   LISTINI:'listini',
-  TIPO_PRODOTTI:'tipo-prodotti'
+  TIPO_PRODOTTI:'tipo-prodotti',
+  MATERIE_PRIME_WEBER: 'materie-prime-weber',
+  MATERIE_PRIME_REGISTRO_WEBER: 'materie-prime-registro-weber',
+  PRODOTTI_WEBER:'prodotti-weber',
+  PRODOTTO_MATERIE_PRIME_WEBER:'prodotto-materie-prime-weber',
+  TIPO_PRODOTTI_WEBER:'tipo-prodotti-weber'
 };

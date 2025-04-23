@@ -104,7 +104,7 @@ export class MateriePrimeComponent extends CommonListComponent implements OnInit
     } else {
       this.service.save(dto).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
-          if (!res.error) {
+          if (res && !res.error) {
             this.retrieveList();
           }
         }

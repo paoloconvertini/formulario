@@ -6,19 +6,35 @@
   </div>
   <mat-spinner *ngIf="loader" class="loader"></mat-spinner>
   <div class="row" style="margin: 3px 0" *ngIf="!loader">
-    <div class="col-md-12">
-      <button style="margin-right:3px" mat-flat-button color="primary" (click)="generaListino(0)" matTooltip="genera listino senza IVA">
+    <div class="col-md-6">
+      <button style="margin-right:3px" mat-flat-button color="primary" (click)="generaListino(0, 0)" matTooltip="genera listino senza IVA">
          NO IVA
         <mat-icon fontIcon="picture_as_pdf"></mat-icon>
       </button>
-      <button style="margin-right:3px" mat-flat-button color="primary" (click)="generaListino(1)" matTooltip="genera listino con IVA">
+      <button style="margin-right:3px" mat-flat-button color="primary" (click)="generaListino(1, 0)" matTooltip="genera listino con IVA">
         CON IVA
         <mat-icon fontIcon="picture_as_pdf"></mat-icon>
       </button>
-      <button style="margin-right:3px" mat-flat-button color="primary" (click)="stampaListino(0)" matTooltip="stampa listino senza IVA">
+      <button style="margin-right:3px" mat-flat-button color="primary" (click)="stampaListino(0, 0)" matTooltip="stampa listino senza IVA">
         NO IVA<mat-icon fontIcon="print"></mat-icon>
       </button>
-      <button style="margin-right:3px" mat-flat-button color="primary" (click)="stampaListino(1)" matTooltip="stampa listino con IVA">
+      <button style="margin-right:3px" mat-flat-button color="primary" (click)="stampaListino(1, 0)" matTooltip="stampa listino con IVA">
+        CON IVA<mat-icon fontIcon="print"></mat-icon>
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button class="public" mat-flat-button color="primary" (click)="generaListino(0, 1)" matTooltip="genera listino pubblico senza IVA">
+        NO IVA
+        <mat-icon fontIcon="picture_as_pdf"></mat-icon>
+      </button>
+      <button class="public"  mat-flat-button color="primary" (click)="generaListino(1, 1)" matTooltip="genera listino pubblico con IVA">
+        CON IVA
+        <mat-icon fontIcon="picture_as_pdf"></mat-icon>
+      </button>
+      <button class="public" mat-flat-button color="primary" (click)="stampaListino(0, 1)" matTooltip="stampa listino pubblico senza IVA">
+        NO IVA<mat-icon fontIcon="print"></mat-icon>
+      </button>
+      <button class="public" mat-flat-button color="primary" (click)="stampaListino(1, 1)" matTooltip="stampa listino pubblico con IVA">
         CON IVA<mat-icon fontIcon="print"></mat-icon>
       </button>
     </div>
@@ -34,9 +50,9 @@
               <td class="header prodotto">Prodotto</td>
               <td class="header">Sacco</td>
               <td class="header">Pedana</td>
-              <td class="header prezzo">Imp. -Iva</td>
-              <td class="header prezzo">Imp. +Iva</td>
-              <td class="header prezzo">Imp. +Iva</td>
+              <td class="header prezzo">Imp. Senza Iva</td>
+              <td class="header prezzo">Imp. Con Iva</td>
+              <td class="header prezzo">Imp. Con Iva</td>
             </tr>
             </thead>
             <tbody>

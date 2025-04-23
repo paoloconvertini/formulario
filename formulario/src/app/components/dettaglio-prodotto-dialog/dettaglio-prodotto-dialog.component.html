@@ -18,7 +18,12 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-lg-6"></div>
+    <div class="col-lg-6">
+      <mat-form-field appearance="fill" style="margin: 0 25px">
+        <mat-label>Inserisci prezzo al pubblico</mat-label>
+        <input matInput type="number" min="0" [(ngModel)]="prodotto.prezzoPubblico" placeholder="prezzo al pubblico">
+      </mat-form-field>
+    </div>
   </div>
   <div class="row">
     <div class="col-lg-3">

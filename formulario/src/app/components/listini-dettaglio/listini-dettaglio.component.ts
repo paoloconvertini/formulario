@@ -39,9 +39,9 @@ export class ListiniDettaglioComponent extends CommonListComponent implements On
        })
   }
 
-  generaListino(iva: any) {
+  generaListino(iva: any, pubblico: any) {
     this.loader = true;
-    this.service.generaListino(this.id, iva).pipe(takeUntil(this.ngUnsubscribe))
+    this.service.generaListino(this.id, iva, pubblico).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data) => {
           this.loader = false;
@@ -64,9 +64,9 @@ export class ListiniDettaglioComponent extends CommonListComponent implements On
       })
   }
 
-  stampaListino(iva: any) {
+  stampaListino(iva: any, pubblico: any) {
     this.loader = true;
-    this.service.generaListino(this.id, iva).pipe(takeUntil(this.ngUnsubscribe))
+    this.service.generaListino(this.id, iva, pubblico).pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (data) => {
           if (data) {

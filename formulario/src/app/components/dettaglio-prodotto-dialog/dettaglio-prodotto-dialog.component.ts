@@ -95,14 +95,15 @@ export class DettaglioProdottoDialogComponent extends BaseComponent implements O
       })
       return;
     }
-    if(!this.prodottoMateriePrimeList[0].prodottoId || this.prodottoMateriePrimeList[0].prodottoId === 0) {
-      this.prodottoMateriePrimeList[0].prodottoNome = this.prodotto.nome;
-    }
+
+    this.prodottoMateriePrimeList[0].prodottoNome = this.prodotto.nome;
     this.prodottoMateriePrimeList[0].tipoProdottoId = this.prodotto.tipoProdotto.id;
     this.prodottoMateriePrimeList[0].tipoProdottoDescrizione = this.prodotto.tipoProdotto.descrizione;
     this.prodottoMateriePrimeList[0].prodottoUnitMisuSacco = this.prodotto.unitMisuSacco;
     this.prodottoMateriePrimeList[0].prodottoQtaSacco = this.prodotto.qtaSacco;
     this.prodottoMateriePrimeList[0].prodottoQtaPedana = this.prodotto.qtaPedana;
+    this.prodottoMateriePrimeList[0].prodottoPrezzoPubblico = this.prodotto.prezzoPubblico;
+
     let error = false;
     this.prodottoMateriePrimeList.forEach(m => {
       if(!m.materiaPrimaNome){

@@ -10,4 +10,5 @@ export class Prodotto {
   materiePrime: MateriaPrima[] = []
   tipoProdotto: TipoProdotto = new TipoProdotto()
   updateDate: any
+  prezzoPubblico: any;
 }

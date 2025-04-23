@@ -22,8 +22,8 @@ export class ForbiddenInterceptor implements HttpInterceptor {
             duration: 5000, horizontalPosition: 'center', verticalPosition: 'top'
           })
         } else if (error.status >= 300 && error.status <= 500) {
-          console.error(error.error&&error.message?error.message:'');
-          this.snackbar.open("Error! " + error.message&&error.message?error.message:'', 'Chiudi', {
+          console.error(error.error&&error.error.msg?error.error.msg:'Errore. Riprovare in seguito!');
+          this.snackbar.open(error.error&&error.error.msg?error.error.msg:'Errore. Riprovare in seguito!', 'Chiudi', {
             duration: 5000, horizontalPosition: 'center', verticalPosition: 'top'
           })
         }

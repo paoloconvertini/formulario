@@ -16,4 +16,5 @@ export class ProdottoMateriePrime {
   tipoProdottoDescrizione: any
   percentuale: number = 0
   edit: boolean = false
+  prodottoPrezzoPubblico: number = 0;
 }

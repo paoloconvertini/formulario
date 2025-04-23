@@ -70,6 +70,7 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
             this.prodotto.qtaSacco = data[0].prodottoQtaSacco;
             this.prodotto.qtaPedana = data[0].prodottoQtaPedana;
             this.prodotto.updateDate = data[0].prodottoUpdateDate;
+            this.prodotto.prezzoPubblico = data[0].prodottoPrezzoPubblico;
             this.prodottoMateriePrimeList = [];
             this.sommaPerc = 0
             this.totMassa = 0

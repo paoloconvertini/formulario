@@ -28,10 +28,15 @@ export class ListiniService extends CommonService{
     return this.http.get<any>(this.url + `/dettaglio/${id}`);
   }
 
-  generaListino(id:any, iva:any): Observable<any> {
+  generaListino(id:any, iva:any, pubblico: any): Observable<any> {
     const httpOptions = {
       responseType: 'blob' as 'json'
     };
-    return this.http.get(`${this.url}/genera-listino/${id}/${iva}`, httpOptions);
+    return this.http.get(`${this.url}/genera-listino/${id}/${iva}/${pubblico}`, httpOptions);
   }
+
+  salvaData(listino:any): Observable<any> {
+    return this.http.post(`${this.url}/salva-data`, listino);
+  }
+
 }

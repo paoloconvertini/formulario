@@ -81,13 +81,21 @@ export class TipoProdottoComponent extends CommonListComponent implements OnInit
     });
   }*/
 
-  salva(materiaPrima: any) {
+  salva(tp: any) {
     this.loader = true;
-      this.service.save(materiaPrima).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+      this.service.save(tp).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (res) => {
           this.loader = false;
-          if (!res.error) {
-            this.retrieveList();
+          if (res && !res.error) {
+            if(tp.id) {
+              const index = this.dataSource.data.findIndex((el:any) => el.id === tp.id);
+              if (index !== -1) {
+                this.dataSource.data[index] = { ...res, edit: false }; // aggiorna con i nuovi dati + disattiva edit
+                this.dataSource._updateChangeSubscription(); // forza refresh della tabella
+              }
+            } else {
+              this.retrieveList();
+            }
           }
         }
       });

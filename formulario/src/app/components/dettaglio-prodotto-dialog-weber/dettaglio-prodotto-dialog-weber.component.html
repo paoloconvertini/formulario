@@ -104,7 +104,8 @@
         </td>
         <td class="percentuale">
           <input type="number" min="0" max="100" class="form-control" [(ngModel)]="materia.percentuale" (change)="calcolaSomma()"
-          [disabled]="materia.materiaPrimaTipologia">
+          [disabled]="materia.materiaPrimaTipologia === 'IP' || materia.materiaPrimaTipologia === 'IW'
+ || materia.materiaPrimaTipologia === 'LA'">
         </td>
       </tr>
       <tr>

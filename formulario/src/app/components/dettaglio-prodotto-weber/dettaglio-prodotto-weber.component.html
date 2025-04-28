@@ -28,7 +28,8 @@
           </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let materia of prodottoMateriePrimeList">
+          <!--            Power colle-->
+            <tr *ngFor="let materia of prodottoMateriePrimePCList">
               <td class="header">{{materia.materiaPrimaNome}}</td>
               <td>KG</td>
               <td>{{materia.percentuale*20}}</td>
@@ -40,60 +41,97 @@
               <td>{{materia.materiaPrimaPrezzo*materia.percentuale/100 | currency: 'EUR':'symbol': '1.3-3'}}</td>
             </tr>
             <tr>
-              <td class="header">Totali</td>
-              <td>KG</td>
-              <td>{{totMassa}}</td>
-              <td>{{sommaPerc}}%</td>
-              <td>QL</td>
-              <td>{{totMiscela20 | number : '1.3-3'}}</td>
+              <td class="header">{{imballoPC.materiaPrimaNome}}</td>
               <td></td>
-              <td>{{prezzo20 | currency: 'EUR':'symbol'}}</td>
-              <td style="background-color: red; color: white; font-size: larger">{{prezzoUnitario | currency: 'EUR':'symbol': '1.3-3' }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{imballoPC.materiaPrimaPrezzo | currency: 'EUR':'symbol'}}</td>
+              <td>{{imballoPC.materiaPrimaPrezzo*20 | currency: 'EUR':'symbol'}}</td>
+              <td>{{imballoPC.materiaPrimaPrezzo | currency: 'EUR':'symbol': '1.3-3'}}</td>
             </tr>
-            <tr>
-              <td class="header">{{imballo.materiaPrimaNome}}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{{imballo.materiaPrimaPrezzo | currency: 'EUR':'symbol'}}</td>
-              <td>{{imballo.materiaPrimaPrezzo*20 | currency: 'EUR':'symbol'}}</td>
-              <td>{{imballo.materiaPrimaPrezzo | currency: 'EUR':'symbol': '1.3-3'}}</td>
+          <tr style="border-bottom: 1px;">
+            <td class="header">{{lavoro.materiaPrimaNome}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{lavoro.materiaPrimaPrezzo | currency: 'EUR':'symbol'}}</td>
+            <td>{{lavoro.materiaPrimaPrezzo*20 | currency: 'EUR':'symbol'}}</td>
+            <td>{{lavoro.materiaPrimaPrezzo | currency: 'EUR':'symbol': '1.3-3'}}</td>
+          </tr>
+          <tr style="border-bottom: 1px;">
+            <td class="header">Totali Prodotti Power Colle</td>
+            <td>KG</td>
+            <td>{{totMassaPc}}</td>
+            <td>{{sommaPercPc}}%</td>
+            <td>QL</td>
+            <td>{{(totMiscela20Pc)  | number : '1.3-3'}}</td>
+            <td></td>
+            <td>{{prezzo20Pc + lavoro.materiaPrimaPrezzo*20 + imballoPC.materiaPrimaPrezzo*20 | currency: 'EUR':'symbol'}}</td>
+            <td style="background-color: red; color: white; font-size: larger">{{(prezzoUnitarioPc + lavoro.materiaPrimaPrezzo
+            + imballoPC.materiaPrimaPrezzo) | currency: 'EUR':'symbol': '1.3-3' }}</td>
+          </tr>
+<!--            WEBER-->
+            <tr class="weber" *ngFor="let materia of prodottoMateriePrimeWeberList">
+              <td class="header weber">{{materia.materiaPrimaNome}}</td>
+              <td class="weber">KG</td>
+              <td class="weber">{{materia.percentuale*20}}</td>
+              <td class="weber">{{materia.percentuale}}%</td>
+              <td class="weber">QL</td>
+              <td class="weber">{{materia.percentuale*20/100 | number : '1.3-3'}}</td>
+              <td class="weber">{{materia.materiaPrimaPrezzo | currency: 'EUR':'symbol'}}</td>
+              <td class="weber">{{materia.materiaPrimaPrezzo*materia.percentuale*20/100 | currency: 'EUR':'symbol'}}</td>
+              <td class="weber">{{materia.materiaPrimaPrezzo*materia.percentuale/100 | currency: 'EUR':'symbol': '1.3-3'}}</td>
             </tr>
             <tr style="border-bottom: 1px;">
-              <td class="header">{{lavoro.materiaPrimaNome}}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{{lavoro.materiaPrimaPrezzo | currency: 'EUR':'symbol'}}</td>
-              <td>{{lavoro.materiaPrimaPrezzo*20 | currency: 'EUR':'symbol'}}</td>
-              <td>{{lavoro.materiaPrimaPrezzo | currency: 'EUR':'symbol': '1.3-3'}}</td>
+              <td class="header weber">{{imballoWe.materiaPrimaNome}}</td>
+              <td class="weber"></td>
+              <td class="weber"></td>
+              <td class="weber"></td>
+              <td class="weber"></td>
+              <td class="weber"></td>
+              <td class="weber">{{imballoWe.materiaPrimaPrezzo | currency: 'EUR':'symbol'}}</td>
+              <td class="weber">{{imballoWe.materiaPrimaPrezzo*20 | currency: 'EUR':'symbol'}}</td>
+              <td class="weber">{{imballoWe.materiaPrimaPrezzo | currency: 'EUR':'symbol': '1.3-3'}}</td>
             </tr>
+          <tr style="border-bottom: 1px;">
+            <td class="header weber">Totali Prodotti Weber</td>
+            <td class="weber">KG</td>
+            <td class="weber">{{totMassaWe}}</td>
+            <td class="weber">{{sommaPercWe}}%</td>
+            <td class="weber">QL</td>
+            <td class="weber">{{totMiscela20We | number : '1.3-3'}}</td>
+            <td class="weber"></td>
+            <td class="weber">{{prezzo20We + imballoWe.materiaPrimaPrezzo*20  | currency: 'EUR':'symbol'}}</td>
+            <td style="background-color: red; color: white; font-size: larger">{{(prezzoUnitarioWe + imballoWe.materiaPrimaPrezzo )| currency: 'EUR':'symbol': '1.3-3' }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
             <tr style="border-bottom: 4px double">
+              <td>TOTALE</td>
+              <td>KG</td>
+              <td>{{totMassaWe + totMassaPc}}</td>
+              <td>{{sommaPercWe + sommaPercPc}}%</td>
+              <td>QL</td>
+              <td>{{(totMiscela20We + totMiscela20Pc)| number : '1.3-3'}}</td>
               <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td style="color:#728E58">Totale con lavoro e imballo</td>
-              <td style="color: #ffffff;background-color: #728E58;">{{imballo.materiaPrimaPrezzo + lavoro.materiaPrimaPrezzo + prezzoUnitario | currency: 'EUR':'symbol'}}</td>
+              <td>{{(prezzo20We + imballoWe.materiaPrimaPrezzo*20 + prezzo20Pc
+                + lavoro.materiaPrimaPrezzo*20 + imballoPC.materiaPrimaPrezzo*20) | currency: 'EUR':'symbol'}}</td>
+              <td style="color: #ffffff;background-color: #728E58;">{{(imballoWe.materiaPrimaPrezzo + imballoPC.materiaPrimaPrezzo +
+              lavoro.materiaPrimaPrezzo + prezzoUnitarioPc + prezzoUnitarioWe) | currency: 'EUR':'symbol': '1.3-3'}}</td>
             </tr>
-<!--            <tr *ngFor="let listino of listini">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Ricarico {{listino.valoreListinoId}}</td>
-              <td>{{listino.ricavo | currency: 'EUR':'symbol'}}</td>
-            </tr>-->
           </tbody>
         </table>
       </div>

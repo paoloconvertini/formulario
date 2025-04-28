@@ -26,15 +26,22 @@ export class DettaglioProdottoWeberComponent extends CommonListComponent impleme
 
   id: any;
   prodotto: Prodotto = new Prodotto();
-  prodottoMateriePrimeList: ProdottoMateriePrime[] = [];
+  prodottoMateriePrimePCList: ProdottoMateriePrime[] = [];
+  prodottoMateriePrimeWeberList: ProdottoMateriePrime[] = [];
   listini: Listino[] = [];
   lavoro: ProdottoMateriePrime = new ProdottoMateriePrime();
-  imballo: ProdottoMateriePrime = new ProdottoMateriePrime();
-  sommaPerc: number = 0
-  totMassa: number = 0
-  totMiscela20: number = 0
-  prezzo20: number = 0
-  prezzoUnitario: number = 0
+  imballoPC: ProdottoMateriePrime = new ProdottoMateriePrime();
+  imballoWe: ProdottoMateriePrime = new ProdottoMateriePrime();
+  sommaPercPc: number = 0
+  sommaPercWe: number = 0
+  totMassaPc: number = 0
+  totMassaWe: number = 0
+  totMiscela20Pc: number = 0
+  totMiscela20We: number = 0
+  prezzo20Pc: number = 0
+  prezzo20We: number = 0
+  prezzoUnitarioPc: number = 0
+  prezzoUnitarioWe: number = 0
 
   constructor(private service: ProdottoMateriePrimeWeberService, private router: ActivatedRoute,
               private dialog: MatDialog, private listinoService: ListiniService) {
@@ -45,7 +52,6 @@ export class DettaglioProdottoWeberComponent extends CommonListComponent impleme
     this.router.params.pipe(takeUntil(this.ngUnsubscribe)).subscribe((params: any) => {
       this.id = params.id;
       this.getProdottoMateriePrime();
-      // this.getListiniByProdotto();
     });
   }
 
@@ -58,7 +64,7 @@ export class DettaglioProdottoWeberComponent extends CommonListComponent impleme
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.getProdottoMateriePrime();
-      //  this.getListiniByProdotto();
+        //  this.getListiniByProdotto();
       }
     });
   }
@@ -78,24 +84,52 @@ export class DettaglioProdottoWeberComponent extends CommonListComponent impleme
             this.prodotto.qtaPedana = data[0].prodottoQtaPedana;
             this.prodotto.updateDate = data[0].prodottoUpdateDate;
             this.prodotto.prezzoPubblico = data[0].prodottoPrezzoPubblico;
-            this.prodottoMateriePrimeList = [];
-            this.sommaPerc = 0
-            this.totMassa = 0
-            this.totMiscela20 = 0
-            this.prezzo20 = 0
-            this.prezzoUnitario = 0
+            this.prodottoMateriePrimePCList = [];
+            this.prodottoMateriePrimeWeberList = [];
+            this.sommaPercPc = 0
+            this.sommaPercWe = 0
+            this.totMassaPc = 0
+            this.totMassaWe = 0
+            this.totMiscela20Pc = 0
+            this.totMiscela20We = 0
+            this.prezzo20Pc = 0
+            this.prezzo20We = 0
+            this.prezzoUnitarioPc = 0
+            this.prezzoUnitarioWe = 0
             data.forEach((m: any) => {
               if (m.materiaPrimaTipologia === 'LA') {
                 this.lavoro = m;
-              } else if (m.materiaPrimaTipologia === 'IM') {
-                this.imballo = m;
-              } else if(m.percentuale > 0){
-                this.prodottoMateriePrimeList.push(m);
-                this.sommaPerc += m.percentuale;
-                this.totMassa += m.percentuale * 20;
-                this.totMiscela20 += m.percentuale * 20 / 100;
-                this.prezzo20 += m.materiaPrimaPrezzo * m.percentuale * 20 / 100;
-                this.prezzoUnitario += m.materiaPrimaPrezzo * m.percentuale / 100;
+              } else if (m.materiaPrimaTipologia === 'IP') {
+                this.imballoPC = m;
+                this.sommaPercPc += m.percentuale;
+                this.totMassaPc += m.percentuale * 20;
+                this.totMiscela20Pc += m.percentuale * 20 / 100;
+                this.prezzo20Pc += m.materiaPrimaPrezzo * m.percentuale * 20 / 100;
+                this.prezzoUnitarioPc += m.materiaPrimaPrezzo * m.percentuale / 100;
+              } else if (m.materiaPrimaTipologia === 'IW') {
+                this.imballoWe = m;
+                this.sommaPercWe += m.percentuale;
+                this.totMassaWe += m.percentuale * 20;
+                this.totMiscela20We += m.percentuale * 20 / 100;
+                this.prezzo20We += m.materiaPrimaPrezzo * m.percentuale * 20 / 100;
+                this.prezzoUnitarioWe += m.materiaPrimaPrezzo * m.percentuale / 100;
+              } else if (m.percentuale > 0) {
+                if (m.materiaPrimaTipologia === 'PC') {
+                  this.prodottoMateriePrimePCList.push(m);
+                  this.sommaPercPc += m.percentuale;
+                  this.totMassaPc += m.percentuale * 20;
+                  this.totMiscela20Pc += m.percentuale * 20 / 100;
+                  this.prezzo20Pc += m.materiaPrimaPrezzo * m.percentuale * 20 / 100;
+                  this.prezzoUnitarioPc += m.materiaPrimaPrezzo * m.percentuale / 100;
+                } else {
+                  this.prodottoMateriePrimeWeberList.push(m);
+                  this.sommaPercWe += m.percentuale;
+                  this.totMassaWe += m.percentuale * 20;
+                  this.totMiscela20We += m.percentuale * 20 / 100;
+                  this.prezzo20We += m.materiaPrimaPrezzo * m.percentuale * 20 / 100;
+                  this.prezzoUnitarioWe += m.materiaPrimaPrezzo * m.percentuale / 100;
+                }
+
               }
             })
           }
@@ -104,16 +138,16 @@ export class DettaglioProdottoWeberComponent extends CommonListComponent impleme
       })
   }
 
-/*  getListiniByProdotto() {
-    this.loader = true;
-    this.listinoService.getAllByIdProdotto(this.id).pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (data: any) => {
-          if (data && data.length > 0) {
-            this.listini = data;
+  /*  getListiniByProdotto() {
+      this.loader = true;
+      this.listinoService.getAllByIdProdotto(this.id).pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe({
+          next: (data: any) => {
+            if (data && data.length > 0) {
+              this.listini = data;
+            }
+            this.loader = false;
           }
-          this.loader = false;
-        }
-      })
-  }*/
+        })
+    }*/
 }

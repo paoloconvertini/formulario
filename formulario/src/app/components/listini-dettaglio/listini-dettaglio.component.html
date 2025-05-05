@@ -59,10 +59,13 @@
               <tr *ngFor="let listino of cat.prodottoPdfDtos">
                 <td class="header prodotto">{{listino.prodottoNome}}</td>
                 <td>{{listino.prodottoUnitMisuSacco}}&nbsp;{{listino.prodottoQtaSacco}}</td>
-                <td>Q.LI {{listino.prodottoQtaPedana}}</td>
-                <td class="prezzo">{{listino.ricavo | currency: 'EUR':'symbol'}}/Q.le</td>
-                <td class="prezzo">{{listino.ricavo*1.22 | currency: 'EUR':'symbol'}}/Q.le</td>
-                <td class="prezzo">{{((listino.ricavo*1.22)/100)*listino.prodottoQtaSacco | currency: 'EUR':'symbol'}}/Sacco</td>
+                <td><span *ngIf="listino.prodottoQtaPedana">Q.LI </span>{{listino.prodottoQtaPedana}}</td>
+                <td class="prezzo">{{listino.ricavo | currency: 'EUR':'symbol'}}/{{listino.prodottoUnitMisuSacco?listino.prodottoUnitMisuSacco:'Q.le'}}</td>
+                <td class="prezzo">{{listino.ricavo*1.22 | currency: 'EUR':'symbol'}}/{{listino.prodottoUnitMisuSacco?listino.prodottoUnitMisuSacco:'Q.le'}}</td>
+                <td class="prezzo">
+                  <span *ngIf="listino.prodottoUnitMisuSacco && listino.prodottoUnitMisuSacco!=='PZ'
+                   && listino.prodottoUnitMisuSacco!=='LT'">{{((listino.ricavo*1.22)/100)*listino.prodottoQtaSacco | currency: 'EUR':'symbol'}}/Sacco</span>
+                </td>
               </tr>
             </tbody>
           </table>

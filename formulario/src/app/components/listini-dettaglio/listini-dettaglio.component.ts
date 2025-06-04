@@ -52,7 +52,17 @@ export class ListiniDettaglioComponent extends CommonListComponent implements On
             let blob = new Blob([data], { type: 'application/pdf' });
             let url= window.URL.createObjectURL(blob);
             a.href = url;
-            a.download = 'Listino_' + this.id + '.pdf';
+            a.download = 'Listino_';
+            if(iva === 1) {
+              a.download +=  this.id + '_iva_inclusa';
+            } else {
+              a.download +=  this.id + '_iva_esclusa';
+            }
+            if(pubblico === 1){
+              a.download += '_pubblico.pdf'
+            } else {
+              a.download += '.pdf';
+            }
             a.click();
             window.URL.revokeObjectURL(url);
           } else {

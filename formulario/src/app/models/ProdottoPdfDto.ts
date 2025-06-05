@@ -10,4 +10,8 @@ export class ProdottoPdfDto {
    valoreListinoId: any;
    valoreListinoValore: any;
    ricavo: any;
+   ricavoQle: any;
+   ricavoQleIva: any;
+   ricavoPz: any;
+   ricavoPzIva: any;
 }

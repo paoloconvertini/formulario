@@ -13,11 +13,19 @@
   width: 50%
 }
 
-.prezzo {
+.prezzo sacco{
   width: 10%;
 }
 
 .public {
   margin-right:3px;
   background-color: #2d3624;
+}
+
+.senza-iva{
+  color: red;
+}
+
+.con-iva{
+  color:green
 }

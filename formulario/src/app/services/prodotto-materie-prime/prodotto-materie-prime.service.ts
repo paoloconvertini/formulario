@@ -23,4 +23,11 @@ export class ProdottoMateriePrimeService extends CommonService{
   salva(prodottoMateriePrimeList: ProdottoMateriePrime[]) : Observable<any>  {
     return this.http.post<any>(this.url, prodottoMateriePrimeList);
   }
+
+  generaListino(id:any): Observable<any> {
+    const httpOptions = {
+      responseType: 'blob' as 'json'
+    };
+    return this.http.get(`${this.url}/stampa-formula/${id}`, httpOptions);
+  }
 }

@@ -98,6 +98,31 @@ export class DettaglioProdottoComponent extends CommonListComponent implements O
       })
   }
 
+  stampa() {
+    this.loader = true;
+    this.service.generaListino(this.id).pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (data) => {
+          if (data) {
+            let blob = new Blob([data], { type: 'application/pdf' });
+            const fileURL = window.URL.createObjectURL(blob);
+
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none'; // nasconde l'iframe
+            iframe.src = fileURL;
+
+            document.body.appendChild(iframe);
+
+            iframe.onload = () => {
+              iframe.contentWindow?.focus();
+              iframe.contentWindow?.print();
+            };
+          }
+          this.loader = false;
+        }
+      })
+  }
+
   getListiniByProdotto() {
     this.loader = true;
     this.listinoService.getAllByIdProdotto(this.id).pipe(takeUntil(this.ngUnsubscribe))

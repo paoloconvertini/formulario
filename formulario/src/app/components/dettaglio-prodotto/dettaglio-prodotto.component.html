@@ -5,6 +5,9 @@
       <button (click)="modifica(prodotto)" mat-icon-button matTooltip="Modifica" class="pointer">
         <mat-icon aria-hidden="false" aria-label="modifica" fontIcon="edit" color="primary"></mat-icon>
       </button>
+      <button  mat-icon-button (click)="stampa()" matTooltip="stampa formula" class="pointer">
+        <mat-icon fontIcon="print" color="primary"></mat-icon>
+      </button>
     </div>
     <div class="col-md-3 col-lg-3 col-sm-3">
       <span style="font-size: 11px">Ultima modifica: {{prodotto.updateDate | date:'dd/MM/yyyy HH:mm'}}</span>
